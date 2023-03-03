@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:thespian/src/models/tmdb/tmdb_person.dart';
+import 'package:thespian/tmdb/tmdb_person.dart';
 
 class TMDBPersonService {
   Future<List<TMDBPerson>> fetchPopularPeople() async {
