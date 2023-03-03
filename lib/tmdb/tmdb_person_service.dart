@@ -5,9 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:thespian/tmdb/tmdb_person.dart';
 
 class TMDBPersonService {
+  final http.Client client;
+
+  TMDBPersonService(this.client);
+
   Future<List<TMDBPerson>> fetchPopularPeople() async {
     final apiKey = dotenv.env['TMDB_API_KEY'];
-    final response = await http.get(Uri.parse('https://api.themoviedb.org/3/person/popular?api_key=$apiKey'));
+    final response = await client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?api_key=$apiKey'));
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);

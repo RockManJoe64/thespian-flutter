@@ -43,9 +43,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Freezed generated code
+# Generated code
 *.freezed.dart
 *.g.dart
+*.mocks.dart
 
 # Env files
 *.env

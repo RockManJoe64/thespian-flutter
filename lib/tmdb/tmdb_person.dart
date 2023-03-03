@@ -5,9 +5,8 @@ part 'tmdb_person.g.dart';
 
 @freezed
 class TMDBPerson with _$TMDBPerson {
-  // 5. define a factory constructor
+  @JsonSerializable(fieldRename: FieldRename.snake)
   factory TMDBPerson({
-    // 6. list all the arguments/properties
     bool? adult,
     List<String>? alsoKnownAs,
     String? biography,
