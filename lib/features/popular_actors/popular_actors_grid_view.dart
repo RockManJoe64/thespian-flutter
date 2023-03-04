@@ -21,13 +21,14 @@ class PopularActorsGridView extends StatelessWidget {
           crossAxisSpacing: 8,
         ),
         itemBuilder: (context, index) {
-          final person = actors[index];
+          final actor = actors[index];
+          final actorName = actor.name;
           return GridTile(
             footer: GridTileBar(
               backgroundColor: Colors.black45,
-              title: Text(person.name ?? ''),
+              title: Text(actorName),
             ),
-            child: ActorGridImage(imageUrl: person.profileImageUrl),
+            child: ActorGridImage(imageUrl: actor.profileImageUrl),
           );
         });
   }
