@@ -9,9 +9,9 @@ class TMDBPersonService {
 
   TMDBPersonService(this.client);
 
-  Future<List<TMDBPerson>> fetchPopularPeople() async {
+  Future<List<TMDBPerson>> fetchPopularPeople({int page = 1}) async {
     final apiKey = dotenv.env['TMDB_API_KEY'];
-    final response = await client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?api_key=$apiKey'));
+    final response = await client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?page=$page&api_key=$apiKey'));
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);

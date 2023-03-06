@@ -5,13 +5,15 @@ import 'package:thespian/models/actor.dart';
 
 class PopularActorsGridView extends StatelessWidget {
   final List<Actor> actors;
+  final ScrollController scrollController;
 
-  const PopularActorsGridView({Key? key, required this.actors})
+  const PopularActorsGridView({Key? key, required this.actors, required this.scrollController})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+        controller: scrollController,
         padding: const EdgeInsets.all(8),
         itemCount: actors.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -40,24 +40,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // TODO move this state logic to the PopularActorsGridView widget
   final TMDBConfigurationService _tmdbConfigurationService = getIt<TMDBConfigurationService>();
   final TMDBPersonService _tmdbPersonService = getIt<TMDBPersonService>();
+  final ScrollController _scrollController = ScrollController();
+  int _currentPage = 1;
   List<Actor> actors = [];
 
   @override
   void initState() {
     super.initState();
     _fetchPopularActors();
+    _scrollController.addListener(_scrollListener);
   }
 
-  void _fetchPopularActors() async {
+  void _fetchPopularActors({int page = 1}) async {
     final config = await _tmdbConfigurationService.fetchImageConfiguration();
-    final response = await _tmdbPersonService.fetchPopularPeople();
+    final response = await _tmdbPersonService.fetchPopularPeople(page: page);
 
     setState(() {
-      actors = convertToActors(config, response);
-      actors.sort((a, b) => b.popularity.compareTo(a.popularity));
+      final converted = convertToActors(config, response);
+      converted.sort((a, b) => b.popularity.compareTo(a.popularity));
+      actors.addAll(converted);
     });
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      _currentPage++;
+      _fetchPopularActors(page: _currentPage);
+    }
   }
 
   @override
@@ -67,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: PopularActorsGridView(actors: actors),
+        child: PopularActorsGridView(actors: actors, scrollController: _scrollController)
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _fetchPopularActors,

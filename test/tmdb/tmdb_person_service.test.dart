@@ -32,7 +32,7 @@ void main() {
       };
 
       final client = MockClient();
-      when(client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?api_key=1234')))
+      when(client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?page=1&api_key=1234')))
           .thenAnswer((_) async => http.Response(jsonEncode(responseBody), 200));
 
       final service = TMDBPersonService(client);
@@ -56,7 +56,7 @@ void main() {
       // Arrange
       final client = MockClient();
       final service = TMDBPersonService(client);
-      when(client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?api_key=1234')))
+      when(client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?page=1&api_key=1234')))
           .thenAnswer((_) async => http.Response('Failed to load popular actors', 500));
 
       // Act, Assert
