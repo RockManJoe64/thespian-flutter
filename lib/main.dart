@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: PopularActorsGridView()
       ),
       floatingActionButton: FloatingActionButton(
