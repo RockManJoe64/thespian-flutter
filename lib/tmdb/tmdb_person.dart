@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'tmdb_person.freezed.dart';
 part 'tmdb_person.g.dart';
 
+// TODO add known_for field to this model
 @freezed
 class TMDBPerson with _$TMDBPerson {
   @JsonSerializable(fieldRename: FieldRename.snake)

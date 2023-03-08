@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 
 import 'package:thespian/features/popular_actors/popular_actors_grid_view.dart';
-import 'package:thespian/models/transformers.dart';
 import 'package:thespian/services/service_locator.dart';
-import 'package:thespian/tmdb/tmdb_configuration_service.dart';
-import 'package:thespian/tmdb/tmdb_person_service.dart';
 
-import 'models/actor.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -20,7 +17,7 @@ class ThespianApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp( // GetMaterialApp is a wrapper around MaterialApp
       title: 'Thespian',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -40,24 +37,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TMDBConfigurationService _tmdbConfigurationService = getIt<TMDBConfigurationService>();
-  final TMDBPersonService _tmdbPersonService = getIt<TMDBPersonService>();
-  List<Actor> actors = [];
-
   @override
   void initState() {
     super.initState();
-    _fetchPopularActors();
   }
 
-  void _fetchPopularActors() async {
-    final config = await _tmdbConfigurationService.fetchImageConfiguration();
-    final response = await _tmdbPersonService.fetchPopularPeople();
+  void searchActors() {
 
-    setState(() {
-      actors = convertToActors(config, response);
-      actors.sort((a, b) => b.popularity.compareTo(a.popularity));
-    });
   }
 
   @override
@@ -66,11 +52,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: PopularActorsGridView(actors: actors),
+      body: const Center(
+        child: PopularActorsGridView()
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _fetchPopularActors,
+        onPressed: searchActors,
         tooltip: 'Search',
         child: const Icon(Icons.search),
       ),

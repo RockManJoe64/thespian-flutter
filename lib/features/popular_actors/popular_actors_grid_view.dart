@@ -1,35 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:thespian/components/actor_grid_image.dart';
-
-import 'package:thespian/models/actor.dart';
+import 'package:thespian/features/popular_actors/popular_actors_controller.dart';
 
 class PopularActorsGridView extends StatelessWidget {
-  final List<Actor> actors;
-
-  const PopularActorsGridView({Key? key, required this.actors})
+  const PopularActorsGridView({Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: actors.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2 / 3,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-        ),
-        itemBuilder: (context, index) {
-          final actor = actors[index];
-          final actorName = actor.name;
-          return GridTile(
-            footer: GridTileBar(
-              backgroundColor: Colors.black45,
-              title: Text(actorName),
+    return GetX<PopularActorsGridViewController>(
+      init: PopularActorsGridViewController(),
+      builder: (controller) {
+        if (controller.popularActors.isEmpty) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          return GridView.builder(
+            controller: controller.scrollController,
+            padding: const EdgeInsets.all(4),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2 / 3,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
             ),
-            child: ActorGridImage(imageUrl: actor.profileImageUrl),
-          );
-        });
+            itemCount: controller.popularActors.length,
+            itemBuilder: (context, index) {
+              final actor = controller.popularActors[index];
+              final actorName = actor.name;
+              return GridTile(
+                footer: GridTileBar(
+                  backgroundColor: Colors.black45,
+                  title: Text(actorName),
+                ),
+                child: ActorGridImage(imageUrl: actor.profileImageUrl),
+              );
+            });
+        }
+      },
+    );
   }
 }
