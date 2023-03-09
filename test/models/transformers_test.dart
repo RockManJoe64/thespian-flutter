@@ -23,7 +23,7 @@ void main() {
       expect(result.first.appearsIn.first.originCountry, ['US']);
       expect(result.first.appearsIn.first.overview, 'overview');
       expect(result.first.appearsIn.first.posterPath, '/posterPath');
-      expect(result.first.appearsIn.first.releaseOrFirstAirDate, 'releaseDate');
+      expect(result.first.appearsIn.first.releaseOrFirstAirDate, DateTime(2020, 1, 1));
       expect(result.first.appearsIn.first.titleOrName, 'title');
     });
   });

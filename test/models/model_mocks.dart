@@ -25,7 +25,7 @@ final popularPersons = [
         originCountry: ['US'],
         overview: 'overview',
         posterPath: '/posterPath',
-        releaseDate: 'releaseDate',
+        releaseDate: '2020-01-01',
         title: 'title',
       ),
     ],

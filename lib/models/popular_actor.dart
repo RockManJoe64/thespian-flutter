@@ -21,7 +21,7 @@ class AppearsIn {
   List<String>? originCountry;
   String? overview;
   String? posterPath;
-  String? releaseOrFirstAirDate;
+  DateTime? releaseOrFirstAirDate;
   String? titleOrName;
 
   AppearsIn({

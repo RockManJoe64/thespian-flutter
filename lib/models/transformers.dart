@@ -2,7 +2,7 @@ import 'package:thespian/models/popular_actor.dart';
 import 'package:thespian/tmdb/tmdb_image_configuration.dart';
 import 'package:thespian/tmdb/tmdb_popular_person.dart';
 
-const defaultDateTime = '1900-01-01';
+var _defaultDateTime = DateTime(1900, 1, 1);
 const defaultIntValue = -1;
 const defaultName = 'No Name';
 
@@ -36,11 +36,11 @@ List<AppearsIn> _convertToAppearsIn(List<KnownFor> knownFor) => knownFor
         originCountry: k.originCountry,
         overview: k.overview,
         posterPath: k.posterPath,
-        releaseOrFirstAirDate: k.releaseDate ?? k.firstAirDate,
+        releaseOrFirstAirDate: parseDateTime(k.releaseDate ?? k.firstAirDate),
         titleOrName: k.title ?? k.name))
     .toList()
-  ..sort((a, b) => (b.releaseOrFirstAirDate ?? defaultDateTime)
-      .compareTo(a.releaseOrFirstAirDate ?? defaultDateTime));
+  ..sort((a, b) => (b.releaseOrFirstAirDate ?? _defaultDateTime)
+      .compareTo(a.releaseOrFirstAirDate ?? _defaultDateTime));
 
 /// Convert a list of [TMDBPopularPerson] to a list of [PopularActor], sorted by popularity.
 List<PopularActor> convertToPopularActors(
