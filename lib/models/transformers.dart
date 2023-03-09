@@ -14,9 +14,12 @@ DateTime? parseDateTime(String? value) =>
 String parseProfilePath(
     String basePath, List<String> profileSizes, String? profilePath) {
   if (profilePath?.isNotEmpty ?? false) {
+    final baseUrl = basePath.endsWith('/')
+        ? basePath.substring(0, basePath.length - 1)
+        : basePath;
     final profileImage = (profilePath ?? '').replaceAll('/', '');
     final width = profileSizes[1];
-    return '$basePath/$width/$profileImage';
+    return '$baseUrl/$width/$profileImage';
   }
 
   return '';
@@ -51,6 +54,6 @@ List<PopularActor> convertToPopularActors(
             profileImageUrl: parseProfilePath(
                 config.secureBaseUrl, config.profileSizes, p.profilePath),
             popularity: p.popularity ?? 0,
-            knownFor: _convertToAppearsIn(p.knownFor ?? [])))
+            appearsIn: _convertToAppearsIn(p.knownFor ?? [])))
         .toList()
       ..sort((a, b) => b.popularity.compareTo(a.popularity));
