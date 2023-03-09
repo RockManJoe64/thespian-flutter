@@ -7,6 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:thespian/tmdb/tmdb_person_service.dart';
 
+import 'tmdb_mocks.dart';
 import 'tmdb_person_service_test.mocks.dart';
 
 @GenerateMocks([http.Client])
@@ -16,24 +17,9 @@ void main() {
   group('fetchPopularPeople', () {
     test('returns a list of actors', () async {
       // Arrange
-      final responseBody = {
-        'results': [
-          {
-            'id': 1,
-            'name': 'Actor 1',
-            'profile_path': '/path/to/profile1.jpg',
-          },
-          {
-            'id': 2,
-            'name': 'Actor 2',
-            'profile_path': '/path/to/profile2.jpg',
-          },
-        ],
-      };
-
       final client = MockClient();
       when(client.get(Uri.parse('https://api.themoviedb.org/3/person/popular?page=1&api_key=1234')))
-          .thenAnswer((_) async => http.Response(jsonEncode(responseBody), 200));
+          .thenAnswer((_) async => http.Response(jsonEncode(popularPersonResponseBody), 200));
 
       final service = TMDBPersonService(client);
 
@@ -45,11 +31,19 @@ void main() {
       expect(actors[0].id, 1);
       expect(actors[0].name, 'Actor 1');
       expect(actors[0].profilePath, '/path/to/profile1.jpg');
-      expect(actors[0].deathday, null);
+      expect(actors[0].knownFor, isNotNull);
+      expect(actors[0].knownFor?.length, 2);
+      expect(actors[0].knownFor?[0].mediaType, 'movie');
+      expect(actors[0].knownFor?[0].releaseDate, '2021-01-01');
+      expect(actors[0].knownFor?[0].firstAirDate, isNull);
       expect(actors[1].id, 2);
       expect(actors[1].name, 'Actor 2');
       expect(actors[1].profilePath, '/path/to/profile2.jpg');
-      expect(actors[1].deathday, null);
+      expect(actors[1].knownFor, isNotNull);
+      expect(actors[1].knownFor?.length, 2);
+      expect(actors[1].knownFor?[0].mediaType, 'tv');
+      expect(actors[1].knownFor?[0].releaseDate, isNull);
+      expect(actors[1].knownFor?[0].firstAirDate, '2021-01-01');
     });
 
     test('throws an exception if the API call fails', () async {
