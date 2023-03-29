@@ -10,6 +10,7 @@ class TMDBPopularPerson with _$TMDBPopularPerson {
     bool? adult,
     int? id,
     List<KnownFor>? knownFor,
+    // TODO add knownForDepartment
     String? name,
     int? page,
     double? popularity,

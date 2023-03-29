@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get/get.dart';
-
-import 'package:thespian/features/popular_actors/popular_actors_grid_view.dart';
+import 'package:thespian/features/popular_actors/home_page.dart';
 import 'package:thespian/services/service_locator.dart';
 
 
@@ -17,49 +15,12 @@ class ThespianApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp( // GetMaterialApp is a wrapper around MaterialApp
+    return MaterialApp( // GetMaterialApp is a wrapper around MaterialApp
       title: 'Thespian',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Thespian'),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void searchActors() {
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(
-        child: PopularActorsGridView()
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: searchActors,
-        tooltip: 'Search',
-        child: const Icon(Icons.search),
-      ),
+      home: const PopularActorsHomePage(title: 'Thespian'),
     );
   }
 }
