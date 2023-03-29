@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thespian/components/actor_grid_image.dart';
 
+import 'actor_info.dart';
 import 'grid_view_controller.dart';
 
 class PopularActorsGridView extends StatelessWidget {
@@ -32,16 +33,18 @@ class PopularActorsGridView extends StatelessWidget {
                 final actor = controller.popularActors[index];
                 final actorName = actor.name;
                 return GridTile(
-                    footer: GridTileBar(
-                      backgroundColor: Colors.black45,
-                      title: Text(actorName),
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/actor_info', arguments: actor);
-                      },
-                      child: ActorGridImage(imageUrl: actor.profileImageUrl),
-                    )
+                  footer: GridTileBar(
+                    backgroundColor: Colors.black45,
+                    title: Text(actorName),
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PopularActorInfo(popularActor: actor)));
+                    },
+                    child: ActorGridImage(imageUrl: actor.profileImageUrl),
+                  )
                 );
               });
           }

@@ -10,7 +10,7 @@ const defaultName = 'No Name';
 DateTime? parseDateTime(String? value) =>
     value != null ? DateTime.parse(value) : null;
 
-/// Convert a [TMDBPopularPerson] to a [PopularActor].
+/// Returns the full URL for a profile image.
 String parseProfilePath(
     String basePath, List<String> profileSizes, String? profilePath) {
   if (profilePath?.isNotEmpty ?? false) {
