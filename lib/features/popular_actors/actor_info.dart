@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thespian/components/actor_profile_image.dart';
+import 'package:thespian/components/backdrop_image.dart';
+import 'package:thespian/components/poster_image.dart';
 import 'package:thespian/models/popular_actor.dart';
 
 class PopularActorInfo extends StatelessWidget {
@@ -13,45 +15,54 @@ class PopularActorInfo extends StatelessWidget {
       appBar: AppBar(
         title: Text(popularActor.name),
       ),
-      body: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Column(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 2 / 3,
-                      child: ActorProfileImage(imageUrl: popularActor.largeProfileImageUrl, width: 200, height: 200),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(popularActor.name),
-                        Text(popularActor.popularity.toString()),
-                      ],
-                    ),
-                  ),
-                ],
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: ActorProfileImage(imageUrl: popularActor.largeProfileImageUrl, width: 200, height: 300),
+                ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: popularActor.appearsIn.length,
-                  itemBuilder: (context, index) {
-                    final appearsIn = popularActor.appearsIn[index];
-                    return ListTile(
-                      title: Text(appearsIn.titleOrName!),
-                      subtitle: Text(appearsIn.releaseOrFirstAirDate.toString()),
-                    );
-                  },
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: PosterImage(imageUrl: popularActor.appearsIn[0].posterImageUrl!),
                 ),
               ),
             ],
-          )
-        ),
+          ),
+          // This will take up the rest of the space in the column
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: Opacity(
+                opacity: 0.25,
+                child: BackdropImage(imageUrl: popularActor.appearsIn[0].backdropImageUrl!),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: PosterImage(imageUrl: popularActor.appearsIn[1].posterImageUrl!),
+                ),
+              ),
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: PosterImage(imageUrl: popularActor.appearsIn[2].posterImageUrl!),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       );
   }
 }

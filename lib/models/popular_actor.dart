@@ -18,21 +18,25 @@ class PopularActor {
 }
 
 class AppearsIn {
-  int? id;
-  String? mediaType;
+  int id;
+  String mediaType;
   List<String>? originCountry;
-  String? overview;
-  String? posterPath;
+  String overview;
+  String posterImageUrl;
+  String backdropImageUrl;
   DateTime? releaseOrFirstAirDate;
-  String? titleOrName;
+  String titleOrName;
+  double voteAverage;
 
   AppearsIn({
-    this.id,
-    this.mediaType,
+    required this.id,
+    required this.mediaType,
     this.originCountry,
-    this.overview,
-    this.posterPath,
+    required this.overview,
+    required this.posterImageUrl,
+    required this.backdropImageUrl,
     this.releaseOrFirstAirDate,
-    this.titleOrName,
+    required this.titleOrName,
+    required this.voteAverage,
   });
 }

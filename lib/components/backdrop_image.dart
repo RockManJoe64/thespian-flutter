@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class PosterImage extends StatelessWidget {
-  const PosterImage({
+class BackdropImage extends StatelessWidget {
+  const BackdropImage({
     Key? key,
-    required this.imageUrl})
+    required this.imageUrl,
+    this.opacity = 1.0,})
       : super(key: key);
 
   final String imageUrl;
+  final double opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +22,8 @@ class PosterImage extends StatelessWidget {
       fadeOutDuration: const Duration(milliseconds: 500),
       fit: BoxFit.cover,
       repeat: ImageRepeat.noRepeat,
-      color: Colors.blue,
-      colorBlendMode: BlendMode.darken,
+      color: Color.fromRGBO(255, 255, 255, opacity),
+      colorBlendMode: BlendMode.modulate,
       imageBuilder: (context, imageProvider) => FadeInImage(
         placeholder: MemoryImage(kTransparentImage),
         image: imageProvider,
