@@ -7,21 +7,19 @@ const defaultIntValue = -1;
 const defaultName = 'No Name';
 
 /// Convert a [String] to a [DateTime].
-DateTime? parseDateTime(String? value) =>
+DateTime? _parseDateTime(String? value) =>
     value != null ? DateTime.parse(value) : null;
 
 /// Returns the full URL for a profile image.
-String parseProfilePath(
-    String basePath, List<String> profileSizes, String? profilePath) {
+String _parseProfilePath(
+    String basePath, String size, String? profilePath) {
   if (profilePath?.isNotEmpty ?? false) {
     final baseUrl = basePath.endsWith('/')
         ? basePath.substring(0, basePath.length - 1)
         : basePath;
     final profileImage = (profilePath ?? '').replaceAll('/', '');
-    final width = profileSizes[1];
-    return '$baseUrl/$width/$profileImage';
+    return '$baseUrl/$size/$profileImage';
   }
-
   return '';
 }
 
@@ -36,7 +34,7 @@ List<AppearsIn> _convertToAppearsIn(List<KnownFor> knownFor) => knownFor
         originCountry: k.originCountry,
         overview: k.overview,
         posterPath: k.posterPath,
-        releaseOrFirstAirDate: parseDateTime(k.releaseDate ?? k.firstAirDate),
+        releaseOrFirstAirDate: _parseDateTime(k.releaseDate ?? k.firstAirDate),
         titleOrName: k.title ?? k.name))
     .toList()
   ..sort((a, b) => (b.releaseOrFirstAirDate ?? _defaultDateTime)
@@ -51,8 +49,10 @@ List<PopularActor> convertToPopularActors(
         .map<PopularActor>((p) => PopularActor(
             id: p.id ?? defaultIntValue,
             name: p.name ?? defaultName,
-            profileImageUrl: parseProfilePath(
-                config.secureBaseUrl, config.profileSizes, p.profilePath),
+            smallProfileImageUrl: _parseProfilePath(
+                config.secureBaseUrl, config.profileSizes[1], p.profilePath), // 0: w45, 1: w185, 2: h632, 3: original
+            largeProfileImageUrl: _parseProfilePath(
+                config.secureBaseUrl, config.profileSizes[2], p.profilePath),
             popularity: p.popularity ?? 0,
             appearsIn: _convertToAppearsIn(p.knownFor ?? [])))
         .toList()

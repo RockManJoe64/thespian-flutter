@@ -14,7 +14,7 @@ void main() {
       expect(result, isNotEmpty);
       expect(result.first.id, 0);
       expect(result.first.name, 'name');
-      expect(result.first.profileImageUrl,
+      expect(result.first.smallProfileImageUrl,
           'https://image.tmdb.org/t/p/w185/profilePath');
       expect(result.first.popularity, 0);
       expect(result.first.appearsIn, isNotEmpty);

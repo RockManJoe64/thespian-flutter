@@ -3,14 +3,16 @@ class PopularActor {
   int id;
   String name;
   double popularity;
-  String profileImageUrl;
+  String smallProfileImageUrl;
+  String largeProfileImageUrl;
   List<AppearsIn> appearsIn;
 
   PopularActor({
     required this.id,
     required this.name,
     required this.popularity,
-    required this.profileImageUrl,
+    required this.smallProfileImageUrl,
+    required this.largeProfileImageUrl,
     required this.appearsIn,
   });
 }

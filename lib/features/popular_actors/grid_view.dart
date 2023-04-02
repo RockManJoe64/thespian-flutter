@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:thespian/components/actor_grid_image.dart';
+import 'package:thespian/components/actor_profile_image.dart';
 
 import 'actor_info.dart';
 import 'grid_view_controller.dart';
@@ -43,7 +43,7 @@ class PopularActorsGridView extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) => PopularActorInfo(popularActor: actor)));
                     },
-                    child: ActorGridImage(imageUrl: actor.profileImageUrl),
+                    child: ActorProfileImage(imageUrl: actor.smallProfileImageUrl, width: 200, height: 200),
                   )
                 );
               });
