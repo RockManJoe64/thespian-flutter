@@ -1,4 +1,4 @@
-final popularPersonResponseBody = {
+const searchPersonResponseBody = {
   'results': [
     {
       'id': 1,
@@ -42,5 +42,5 @@ final popularPersonResponseBody = {
         },
       ]
     },
-  ],
+  ]
 };

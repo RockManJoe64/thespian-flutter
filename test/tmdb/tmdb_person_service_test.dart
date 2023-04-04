@@ -7,7 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:thespian/tmdb/tmdb_person_service.dart';
 
-import 'tmdb_mocks.dart';
+import 'mock_tmdb_popular_person_response.dart';
 import 'tmdb_person_service_test.mocks.dart';
 
 @GenerateMocks([http.Client])
