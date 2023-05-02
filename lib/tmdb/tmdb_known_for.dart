@@ -1,26 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'tmdb_person_search_result.freezed.dart';
-part 'tmdb_person_search_result.g.dart';
+part 'tmdb_known_for.freezed.dart';
+part 'tmdb_known_for.g.dart';
 
-@freezed
-class TMDBPersonSearchResult with _$TMDBPersonSearchResult {
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory TMDBPersonSearchResult({
-    bool? adult,
-    int? id,
-    List<KnownFor>? knownFor,
-    // TODO add knownForDepartment
-    String? name,
-    int? page,
-    double? popularity,
-    String? profilePath,
-  }) = _TMDBPersonSearchResult;
-
-  factory TMDBPersonSearchResult.fromJson(Map<String, dynamic> json) =>
-      _$TMDBPersonSearchResultFromJson(json);
-}
-
+/// Maps to the `known_for` property in various JSON objects returned by the TMDB API.
 @freezed
 class KnownFor with _$KnownFor {
   @JsonSerializable(fieldRename: FieldRename.snake)

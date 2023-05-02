@@ -1,64 +1,68 @@
-import 'package:thespian/models/popular_actor.dart';
-import 'package:thespian/tmdb/tmdb_image_configuration.dart';
-import 'package:thespian/tmdb/tmdb_popular_person.dart';
+import 'package:thespian/models/actor_brief.dart';
+import 'package:thespian/models/movie_brief.dart';
+import 'package:thespian/models/tv_show_brief.dart';
+import 'package:thespian/tmdb/tmdb_known_for.dart';
+import 'package:thespian/tmdb/tmdb_person.dart';
 
 var _defaultDateTime = DateTime(1900, 1, 1);
 const defaultIntValue = -1;
 const defaultName = 'No Name';
-const smallProfileImageSizeIndex = 1;
-const largeProfileImageSizeIndex = 3;
-const posterImageSizeIndex = 3;
-const backdropImageSizeIndex = 2;
 
 /// Convert a [String] to a [DateTime].
-DateTime? _parseDateTime(String? value) =>
-    value != null ? DateTime.parse(value) : null;
+DateTime _parseDateTime(String? value) =>
+    value != null ? DateTime.parse(value) : _defaultDateTime;
 
-/// Returns the full URL for a profile image.
-String _parseImagePath(
-    String basePath, String size, String? profilePath) {
-  if (profilePath?.isNotEmpty ?? false) {
-    final baseUrl = basePath.endsWith('/')
-        ? basePath.substring(0, basePath.length - 1)
-        : basePath;
-    final profileImage = (profilePath ?? '').replaceAll('/', '');
-    return '$baseUrl/$size/$profileImage';
-  }
-  return '';
-}
+List<MovieBrief> _mapKnownForToMovies(List<KnownFor> knownFor) => knownFor
+    .where((k) => k.mediaType == 'movie' && k.adult == false)
+    .map<MovieBrief>((k) => MovieBrief(
+        adult: k.adult ?? false,
+        genreIds: k.genreIds ?? [],
+        id: k.id ?? defaultIntValue,
+        mediaType: k.mediaType ?? '',
+        originalLanguage: k.originalLanguage ?? '',
+        title: k.title ?? defaultName,
+        originalTitle: k.originalTitle ?? defaultName,
+        overview: k.overview ?? '',
+        posterPath: k.posterPath ?? '',
+        backdropPath: k.backdropPath ?? '',
+        releaseDate: _parseDateTime(k.releaseDate),
+        video: k.hasVideo ?? false,
+        voteAverage: k.voteAverage ?? 0,
+        voteCount: k.voteCount ?? 0))
+    .toList();
 
-/// Convert a list of [KnownFor] to a list of [AppearsIn], sorted by popularity.
-List<AppearsIn> _convertToAppearsIn(TMDBImageConfiguration config, List<KnownFor> knownFor) => knownFor
-    .where((k) =>
-        k.id != null &&
-        ((k.title?.isNotEmpty ?? false) || (k.name?.isNotEmpty ?? false)))
-    .map<AppearsIn>((k) => AppearsIn(
-        id: k.id!,
-        mediaType: k.mediaType!,
-        originCountry: k.originCountry,
-        overview: k.overview!,
-        posterImageUrl: _parseImagePath(config.secureBaseUrl, config.posterSizes[posterImageSizeIndex], k.posterPath),
-        backdropImageUrl: _parseImagePath(config.secureBaseUrl, config.backdropSizes[backdropImageSizeIndex], k.backdropPath),
-        releaseOrFirstAirDate: _parseDateTime(k.releaseDate ?? k.firstAirDate),
-        titleOrName: (k.title ?? k.name)!,
-        voteAverage: k.voteAverage ?? 0))
-    .toList()
-  ..sort((a, b) => b.voteAverage.compareTo(a.voteAverage));
+List<TVShowBrief> _mapKnownForToTvShows(List<KnownFor> knownFor) => knownFor
+    .where((k) => k.mediaType == 'tv')
+    .map<TVShowBrief>((k) => TVShowBrief(
+        backdropPath: k.backdropPath ?? '',
+        firstAirDate: _parseDateTime(k.firstAirDate),
+        genreIds: k.genreIds ?? [],
+        id: k.id ?? defaultIntValue,
+        mediaType: k.mediaType ?? '',
+        name: k.name ?? defaultName,
+        originalLanguage: k.originalLanguage ?? '',
+        originalName: k.originalName ?? defaultName,
+        overview: k.overview ?? '',
+        originCountry: k.originCountry ?? [],
+        posterPath: k.posterPath ?? '',
+        voteAverage: k.voteAverage ?? 0,
+        voteCount: k.voteCount ?? 0))
+    .toList();
 
-/// Convert a list of [TMDBPopularPerson] to a list of [PopularActor], sorted by popularity.
-List<PopularActor> convertToPopularActors(
-        TMDBImageConfiguration config, List<TMDBPopularPerson> people) =>
+List<ActorBrief> mapPopularPersonToActorBriefs(List<TMDBPerson> people) =>
     people
         .where((p) =>
             p.id != null && (p.name?.isNotEmpty ?? false) && p.adult == false)
-        .map<PopularActor>((p) => PopularActor(
+        .map<ActorBrief>((p) => ActorBrief(
+            adult: p.adult ?? false,
+            gender: p.gender ?? 0,
             id: p.id ?? defaultIntValue,
+            knownForDepartment: p.knownForDepartment ?? '',
             name: p.name ?? defaultName,
-            smallProfileImageUrl: _parseImagePath(
-                config.secureBaseUrl, config.profileSizes[smallProfileImageSizeIndex], p.profilePath), // 0: w45, 1: w185, 2: h632, 3: original
-            largeProfileImageUrl: _parseImagePath(
-                config.secureBaseUrl, config.profileSizes[largeProfileImageSizeIndex], p.profilePath),
             popularity: p.popularity ?? 0,
-            appearsIn: _convertToAppearsIn(config, p.knownFor ?? [])))
+            profilePath: p.profilePath ?? '',
+            moviesKnownFor: _mapKnownForToMovies(p.knownFor ?? []),
+            tvShowsKnownFor: _mapKnownForToTvShows(p.knownFor ?? []),
+            ))
         .toList()
       ..sort((a, b) => b.popularity.compareTo(a.popularity));
