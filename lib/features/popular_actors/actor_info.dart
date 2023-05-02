@@ -2,15 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:thespian/components/actor_profile_image.dart';
 import 'package:thespian/components/backdrop_image.dart';
 import 'package:thespian/components/poster_image.dart';
-import 'package:thespian/models/popular_actor.dart';
+
+import 'popular_actor_view_model.dart';
+
+const badUrl = "https://foobar.com";
 
 class PopularActorInfo extends StatelessWidget {
   const PopularActorInfo({Key? key, required this.popularActor}) : super(key: key);
 
   final PopularActor popularActor;
 
+  List<String> _getPosterImageUrls() {
+    var appearsIn = popularActor.appearsIn;
+    var posterImageUrls = appearsIn.map((e) => e.posterImageUrl)
+        .toList();
+    posterImageUrls.addAll([badUrl, badUrl, badUrl]);
+    posterImageUrls = posterImageUrls.sublist(0, 3);
+    return posterImageUrls;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var appearsIn = popularActor.appearsIn;
+    var backdropImageUrl = appearsIn.isNotEmpty ? appearsIn[0].backdropImageUrl! : badUrl;
+    var posterImageUrls = _getPosterImageUrls();
     return Scaffold(
       appBar: AppBar(
         title: Text(popularActor.name),
@@ -29,7 +44,7 @@ class PopularActorInfo extends StatelessWidget {
               Expanded(
                 child: AspectRatio(
                   aspectRatio: 2 / 3,
-                  child: PosterImage(imageUrl: popularActor.appearsIn[0].posterImageUrl!),
+                  child: PosterImage(imageUrl: posterImageUrls.isNotEmpty ? posterImageUrls[0] : badUrl),
                 ),
               ),
             ],
@@ -41,7 +56,7 @@ class PopularActorInfo extends StatelessWidget {
               height: 50,
               child: Opacity(
                 opacity: 0.25,
-                child: BackdropImage(imageUrl: popularActor.appearsIn[0].backdropImageUrl!),
+                child: BackdropImage(imageUrl: backdropImageUrl),
               ),
             ),
           ),
@@ -50,13 +65,13 @@ class PopularActorInfo extends StatelessWidget {
               Expanded(
                 child: AspectRatio(
                   aspectRatio: 2 / 3,
-                  child: PosterImage(imageUrl: popularActor.appearsIn[1].posterImageUrl!),
+                  child: PosterImage(imageUrl: posterImageUrls.isNotEmpty ? posterImageUrls[1] : badUrl),
                 ),
               ),
               Expanded(
                 child: AspectRatio(
                   aspectRatio: 2 / 3,
-                  child: PosterImage(imageUrl: popularActor.appearsIn[2].posterImageUrl!),
+                  child: PosterImage(imageUrl: posterImageUrls.isNotEmpty ? posterImageUrls[2] : badUrl),
                 ),
               ),
             ],
