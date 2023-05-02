@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:thespian/models/transformers.dart';
+import 'package:thespian/models/popular_person_transformers.dart';
 import 'package:thespian/services/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/tmdb_image_configuration.dart';
