@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:thespian/models/popular_person_transformers.dart';
+import 'package:thespian/models/person_transformer.dart';
 
 import 'model_mocks.dart';
 

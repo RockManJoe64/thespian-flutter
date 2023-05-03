@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:thespian/models/popular_person_transformers.dart';
+import 'package:thespian/models/person_transformer.dart';
 import 'package:thespian/services/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/tmdb_image_configuration.dart';
@@ -17,8 +17,8 @@ class PopularActorsGridViewController extends ChangeNotifier {
 
   final TMDBConfigurationService _tmdbConfigurationService = getIt<TMDBConfigurationService>();
   final TMDBPersonService _tmdbPersonService = getIt<TMDBPersonService>();
-  int _currentPage = 1;
   TMDBImageConfiguration? _imageConfiguration;
+  int _currentPage = 1;
 
   PopularActorsGridViewController() {
     _fetchPopularActors();

@@ -9,14 +9,15 @@ class TMDBSearchService {
 
   final http.Client client;
 
-  Future<List<TMDBPerson>> searchPeopleByKeyword(String keyword) async {
+  Future<List<TMDBPerson>> searchPeopleByKeyword(String keyword, {int page = 1}) async {
+    assert(page > 0);
     final apiKey = dotenv.env['TMDB_API_KEY'];
     final queryParameters = {
       'query': keyword,
       'api_key': apiKey,
       'language': 'en-US',
       'region': 'US',
-      'page': '1',
+      'page': page.toString(),
     };
     final uri = Uri.https('api.themoviedb.org', '3/search/person', queryParameters);
     final response = await client.get(Uri.parse(uri.toString()));
