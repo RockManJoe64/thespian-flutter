@@ -25,6 +25,9 @@ class PopularActor {
     required this.appearsIn,
   });
 
+  bool get containsSmallProfileImage => smallProfileImageUrl.isNotEmpty;
+  bool get containsLargeProfileImage => largeProfileImageUrl.isNotEmpty;
+
   static fromActorBrief(TMDBImageConfiguration config, ActorBrief actorBrief) {
     final movies = AppearsIn.fromMoviesKnownFor(config, actorBrief.moviesKnownFor!);
     final tvShows = AppearsIn.fromTvShowsKnownFor(config, actorBrief.tvShowsKnownFor!);

@@ -12,7 +12,7 @@ class SearchActorController extends ChangeNotifier {
   final _actorSearchResults = <PopularActor>[];
   UnmodifiableListView<PopularActor> get actorSearchResults => UnmodifiableListView(_actorSearchResults);
 
-  final textEditingController = TextEditingController();
+  final searchTextEditingController = TextEditingController();
   final scrollController = ScrollController();
 
   final TMDBConfigurationService _tmdbConfigurationService = getIt<TMDBConfigurationService>();
@@ -22,30 +22,37 @@ class SearchActorController extends ChangeNotifier {
   String _keyword = '';
 
   SearchActorController() {
-    textEditingController.addListener(_textListener);
+    searchTextEditingController.addListener(_textListener);
     scrollController.addListener(_scrollListener);
   }
 
   void performSearch(String keyword) {
-    _keyword = keyword;
+    if (keyword.isNotEmpty) _keyword = keyword;
+    searchAgain();
+  }
+
+  void searchAgain() {
     _currentPage = 1;
+    _clearResults();
     _performSearch();
   }
 
   void clear() {
-    textEditingController.clear();
+    searchTextEditingController.clear();
+    _clearResults();
+  }
+
+  void _clearResults() {
+    _actorSearchResults.clear();
     notifyListeners();
   }
 
   void _textListener() {
     const debounceDuration = Duration(milliseconds: 500);
     Future.delayed(debounceDuration, () {
-      _keyword = textEditingController.text;
-      if (_keyword.isEmpty) {
-        _actorSearchResults.clear();
-        notifyListeners();
-        return;
-      } else if (_keyword.length < 3) {
+      _keyword = searchTextEditingController.text;
+      if (_keyword.isEmpty || _keyword.length < 3) {
+        _clearResults();
         return;
       }
       _performSearch();
@@ -71,7 +78,9 @@ class SearchActorController extends ChangeNotifier {
     final dataModels = mapPopularPersonToActorBriefs(response, sort: false);
     final viewModels = dataModels.map<PopularActor>((dataModel) =>
         PopularActor.fromActorBrief(_imageConfiguration!, dataModel))
+        .where((actor) => actor.containsSmallProfileImage && actor.containsLargeProfileImage)
         .toList();
+    if (page == 1) _actorSearchResults.clear();
     _actorSearchResults.addAll(viewModels);
     notifyListeners();
   }

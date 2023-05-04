@@ -17,7 +17,7 @@ class SearchActorResultsGridView extends StatelessWidget {
         child: Consumer<SearchActorController>(
             builder: (context, controller, child) {
           if (controller.actorSearchResults.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Icon(Icons.search, size: 100));
           } else {
             return GridView.builder(
                 controller: controller.scrollController,
