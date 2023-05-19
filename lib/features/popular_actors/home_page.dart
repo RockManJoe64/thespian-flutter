@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thespian/features/popular_actors/search_actor_widget.dart';
 
 import 'grid_view.dart';
 import 'grid_view_controller.dart';
@@ -20,10 +21,6 @@ class _PopularActorsHomePageState extends State<PopularActorsHomePage> {
     super.initState();
   }
 
-  void searchActors() {
-    // TODO implement search
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +31,12 @@ class _PopularActorsHomePageState extends State<PopularActorsHomePage> {
         child: PopularActorsGridView(controller: controller)
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: searchActors,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchActorWidget())
+          );
+        },
         tooltip: 'Search',
         child: const Icon(Icons.search),
       ),

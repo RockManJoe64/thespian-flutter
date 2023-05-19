@@ -1,28 +1,30 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'tmdb_known_for.dart';
+
 part 'tmdb_person.freezed.dart';
 part 'tmdb_person.g.dart';
 
-// TODO add known_for field to this model
+/// Maps to the object returned by the TMDB API endpoint `/person/popular`.
+///
+/// This also maps to the objects returned by the `/search/person` endpoint.
+///
+/// See: https://developers.themoviedb.org/3/people/get-popular-people
 @freezed
 class TMDBPerson with _$TMDBPerson {
   @JsonSerializable(fieldRename: FieldRename.snake)
-  factory TMDBPerson({
+  const factory TMDBPerson({
     bool? adult,
-    List<String>? alsoKnownAs,
-    String? biography,
-    String? birthday,
-    String? deathday,
     int? gender,
-    String? homepage,
     int? id,
-    String? imdbId,
+    List<KnownFor>? knownFor,
     String? knownForDepartment,
     String? name,
-    String? placeOfBirth,
+    int? page,
     double? popularity,
     String? profilePath,
   }) = _TMDBPerson;
 
-  factory TMDBPerson.fromJson(Map<String, dynamic> json) => _$TMDBPersonFromJson(json);
+  factory TMDBPerson.fromJson(Map<String, dynamic> json) =>
+      _$TMDBPersonFromJson(json);
 }
