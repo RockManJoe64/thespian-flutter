@@ -32,7 +32,7 @@ class _SearchActorWidgetState extends State<SearchActorWidget> with RouteAware {
 
   @override
   void didPopNext() {
-    _controller.searchAgain();
+    //_controller.searchAgain(); // TODO cleanup didPopNext and RouteAware
   }
 
   void _handleClearIconPressed() {

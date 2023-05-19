@@ -55,7 +55,6 @@ class SearchActorController extends ChangeNotifier {
         _clearResults();
         return;
       }
-      _performSearch();
     });
   }
 
