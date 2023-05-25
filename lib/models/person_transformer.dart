@@ -12,7 +12,7 @@ const defaultName = 'No Name';
 DateTime _parseDateTime(String? value) =>
     value != null && value!.isNotEmpty ? DateTime.parse(value) : _defaultDateTime;
 
-List<MovieBrief> _mapKnownForToMovies(List<KnownFor> knownFor) => knownFor
+List<MovieBrief> _mapKnownForToMovies(List<TmdbKnownFor> knownFor) => knownFor
     .where((k) => k.mediaType == 'movie' && k.adult == false)
     .map<MovieBrief>((k) => MovieBrief(
         adult: k.adult ?? false,
@@ -31,7 +31,7 @@ List<MovieBrief> _mapKnownForToMovies(List<KnownFor> knownFor) => knownFor
         voteCount: k.voteCount ?? 0))
     .toList();
 
-List<TVShowBrief> _mapKnownForToTvShows(List<KnownFor> knownFor) => knownFor
+List<TVShowBrief> _mapKnownForToTvShows(List<TmdbKnownFor> knownFor) => knownFor
     .where((k) => k.mediaType == 'tv')
     .map<TVShowBrief>((k) => TVShowBrief(
         backdropPath: k.backdropPath ?? '',

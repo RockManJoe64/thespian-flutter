@@ -5,9 +5,9 @@ part 'tmdb_known_for.g.dart';
 
 /// Maps to the `known_for` property in various JSON objects returned by the TMDB API.
 @freezed
-class KnownFor with _$KnownFor {
+class TmdbKnownFor with _$TmdbKnownFor {
   @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory KnownFor({
+  const factory TmdbKnownFor({
     bool? adult,
     String? backdropPath,
     List<int>? genreIds,
@@ -27,8 +27,8 @@ class KnownFor with _$KnownFor {
     String? name,
     String? originalName,
     List<String>? originCountry,
-  }) = _KnownFor;
+  }) = _TmdbKnownFor;
 
-  factory KnownFor.fromJson(Map<String, dynamic> json) =>
-      _$KnownForFromJson(json);
+  factory TmdbKnownFor.fromJson(Map<String, dynamic> json) =>
+      _$TmdbKnownForFromJson(json);
 }
