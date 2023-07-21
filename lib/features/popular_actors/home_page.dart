@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thespian/features/popular_actors/search_actor_widget.dart';
+import 'package:thespian/features/search/search_actor_widget.dart';
 
 import 'grid_view.dart';
 import 'grid_view_controller.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thespian/components/global_route_observer.dart';
-import 'package:thespian/features/popular_actors/search_actor_controller.dart';
-import 'package:thespian/features/popular_actors/search_actor_results_grid_view.dart';
+import 'package:thespian/features/search/search_actor_controller.dart';
+import 'package:thespian/features/search/search_actor_results_grid_view.dart';
 
 class SearchActorWidget extends StatefulWidget {
   const SearchActorWidget({super.key});
