@@ -17,7 +17,7 @@ class TMDBPerson with _$TMDBPerson {
     bool? adult,
     int? gender,
     int? id,
-    List<KnownFor>? knownFor,
+    List<TmdbKnownFor>? knownFor,
     String? knownForDepartment,
     String? name,
     int? page,

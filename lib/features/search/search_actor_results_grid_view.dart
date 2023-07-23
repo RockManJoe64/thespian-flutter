@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thespian/components/actor_profile_image.dart';
 import 'package:thespian/features/popular_actors/actor_info.dart';
-import 'package:thespian/features/popular_actors/search_actor_controller.dart';
+import 'package:thespian/features/search/search_actor_controller.dart';
 
 class SearchActorResultsGridView extends StatelessWidget {
   final SearchActorController controller;
@@ -16,7 +16,7 @@ class SearchActorResultsGridView extends StatelessWidget {
         create: (context) => controller,
         child: Consumer<SearchActorController>(
             builder: (context, controller, child) {
-          if (controller.actorSearchResults.isEmpty) {
+          if (controller.searchResults.isEmpty) {
             return const Center(child: Icon(Icons.search, size: 100));
           } else {
             return GridView.builder(
@@ -28,10 +28,10 @@ class SearchActorResultsGridView extends StatelessWidget {
                   mainAxisSpacing: 4,
                   crossAxisSpacing: 4,
                 ),
-                itemCount: controller.actorSearchResults.length,
+                itemCount: controller.searchResults.length,
                 itemBuilder: (context, index) {
-                  final actor = controller.actorSearchResults[index];
-                  final actorName = actor.name;
+                  final searchResult = controller.searchResults[index];
+                  final actorName = searchResult.name;
                   return GridTile(
                       footer: GridTileBar(
                         backgroundColor: Colors.black45,
@@ -39,14 +39,17 @@ class SearchActorResultsGridView extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      PopularActorInfo(popularActor: actor)));
+                          if (searchResult.mediaType == 'person') {
+                            final actor = controller.toPopularActor(searchResult);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        PopularActorInfo(popularActor: actor)));
+                          }
                         },
                         child: ActorProfileImage(
-                            imageUrl: actor.smallProfileImageUrl,
+                            imageUrl: searchResult.smallImageUrl,
                             width: 200,
                             height: 200),
                       ));

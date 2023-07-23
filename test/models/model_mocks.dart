@@ -23,7 +23,7 @@ final popularPersons = [
     gender: 1,
     id: 0,
     knownFor: [
-      KnownFor(
+      TmdbKnownFor(
         adult: false,
         backdropPath: '/backdropPath',
         genreIds: [0, 1],
@@ -40,7 +40,7 @@ final popularPersons = [
         voteAverage: 8.2,
         voteCount: 100,
       ),
-      KnownFor(
+      TmdbKnownFor(
         adult: false,
         backdropPath: '/backdropPath',
         genreIds: [0, 1],
