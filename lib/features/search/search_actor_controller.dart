@@ -2,15 +2,19 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:thespian/features/popular_actors/popular_actor_view_model.dart';
-import 'package:thespian/models/person_transformer.dart';
+import 'package:thespian/features/search/popular_actor_transformer.dart';
+import 'package:thespian/features/search/search_view_model.dart';
+import 'package:thespian/models/search_result.dart';
+import 'package:thespian/models/search_transformer.dart';
 import 'package:thespian/services/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/tmdb_image_configuration.dart';
 import 'package:thespian/tmdb/tmdb_search_service.dart';
 
 class SearchActorController extends ChangeNotifier {
-  final _actorSearchResults = <PopularActor>[];
-  UnmodifiableListView<PopularActor> get actorSearchResults => UnmodifiableListView(_actorSearchResults);
+  final _searchViewModels = <SearchViewModel>[];
+  final _dataModels = <SearchResult>[];
+  UnmodifiableListView<SearchViewModel> get searchResults => UnmodifiableListView(_searchViewModels);
 
   final searchTextEditingController = TextEditingController();
   final scrollController = ScrollController();
@@ -42,8 +46,16 @@ class SearchActorController extends ChangeNotifier {
     _clearResults();
   }
 
+  /// Returns a [PopularActor] from the [SearchViewModel] with the given [id].
+  /// This is needed to support displaying a Person result using the [PopularActorInfo] widget.
+  PopularActor toPopularActor(SearchViewModel searchViewModel) {
+    final searchResult = _dataModels.firstWhere((dataModel) => dataModel.id == searchViewModel.id);
+    return mapToPopularActor(_imageConfiguration!, searchResult);
+  }
+
   void _clearResults() {
-    _actorSearchResults.clear();
+    _dataModels.clear();
+    _searchViewModels.clear();
     notifyListeners();
   }
 
@@ -68,19 +80,23 @@ class SearchActorController extends ChangeNotifier {
 
   void _performSearch({int page = 1}) async {
     if (_keyword.isEmpty) {
-      _actorSearchResults.clear();
+      _searchViewModels.clear();
       notifyListeners();
       return;
     }
     _imageConfiguration ??= await _tmdbConfigurationService.fetchImageConfiguration();
-    final response = await _tmdbSearchService.searchPeopleByKeyword(_keyword, page: page);
-    final dataModels = mapPopularPersonToActorBriefs(response, sort: false);
-    final viewModels = dataModels.map<PopularActor>((dataModel) =>
-        PopularActor.fromActorBrief(_imageConfiguration!, dataModel))
-        .where((actor) => actor.containsSmallProfileImage && actor.containsLargeProfileImage)
+    final response = await _tmdbSearchService.searchAnyByKeyword(_keyword, page: page);
+    final dataModels = mapToSearchResults(response, sort: false);
+    final viewModels = dataModels.map<SearchViewModel>((dataModel) =>
+        SearchViewModel.fromSearchResult(_imageConfiguration!, dataModel))
+        .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
         .toList();
-    if (page == 1) _actorSearchResults.clear();
-    _actorSearchResults.addAll(viewModels);
+    if (page == 1) {
+      _dataModels.clear();
+      _searchViewModels.clear();
+    }
+    _dataModels.addAll(dataModels);
+    _searchViewModels.addAll(viewModels);
     notifyListeners();
   }
 }

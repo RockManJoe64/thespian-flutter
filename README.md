@@ -14,3 +14,11 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Testing on Android Device
+
+To uninstall the app from the device, run the following command:
+
+```bash
+adb uninstall com.trespassstudio.thespian
+```

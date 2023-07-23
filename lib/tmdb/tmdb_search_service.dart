@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -33,16 +34,16 @@ class TMDBSearchService {
 
   Future<List<TMDBSearchResult>> searchAnyByKeyword(String keyword, {int page = 1}) async {
     assert(page > 0);
-    final apiKey = dotenv.env['TMDB_API_KEY'];
+    final authToken = dotenv.env['TMDB_AUTH_TOKEN'];
+    final headers = {HttpHeaders.authorizationHeader: 'Bearer $authToken'};
     final queryParameters = {
       'query': keyword,
-      'api_key': apiKey,
       'language': 'en-US',
       'region': 'US',
       'page': page.toString(),
     };
     final uri = Uri.https('api.themoviedb.org', '3/search/multi', queryParameters);
-    final response = await client.get(Uri.parse(uri.toString()));
+    final response = await client.get(Uri.parse(uri.toString()), headers: headers);
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       final List<dynamic> data = jsonData['results'];

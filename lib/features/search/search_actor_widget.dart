@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:thespian/components/global_route_observer.dart';
 import 'package:thespian/features/search/search_actor_controller.dart';
 import 'package:thespian/features/search/search_actor_results_grid_view.dart';
 
@@ -10,29 +9,12 @@ class SearchActorWidget extends StatefulWidget {
   State<SearchActorWidget> createState() => _SearchActorWidgetState();
 }
 
-class _SearchActorWidgetState extends State<SearchActorWidget> with RouteAware {
+class _SearchActorWidgetState extends State<SearchActorWidget> {
   final _controller = SearchActorController();
 
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    globalRouteObserver.subscribe(this, ModalRoute.of(context)!);
-  }
-
-  @override
-  void dispose() {
-    globalRouteObserver.unsubscribe(this);
-    super.dispose();
-  }
-
-  @override
-  void didPopNext() {
-    //_controller.searchAgain(); // TODO cleanup didPopNext and RouteAware
   }
 
   void _handleClearIconPressed() {
