@@ -1,6 +1,6 @@
-import 'package:thespian/models/actor_brief.dart';
-import 'package:thespian/models/movie_brief.dart';
-import 'package:thespian/models/tv_show_brief.dart';
+import 'package:thespian/domain/models/actor_brief.dart';
+import 'package:thespian/domain/models/movie_brief.dart';
+import 'package:thespian/domain/models/tv_show_brief.dart';
 
 class SearchResult {
   final int id;

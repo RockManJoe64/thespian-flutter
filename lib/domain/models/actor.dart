@@ -1,4 +1,4 @@
-import 'package:thespian/models/gender.dart';
+import 'package:thespian/domain/models/gender.dart';
 
 class Actor {
   String? biography;

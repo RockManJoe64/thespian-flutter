@@ -1,10 +1,10 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:thespian/domain/models/search_result.dart';
 import 'package:thespian/features/popular_actors/popular_actor_view_model.dart';
 import 'package:thespian/features/search/popular_actor_transformer.dart';
 import 'package:thespian/features/search/search_view_model.dart';
-import 'package:thespian/models/search_result.dart';
 import 'package:thespian/models/search_transformer.dart';
 import 'package:thespian/services/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';

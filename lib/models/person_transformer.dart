@@ -1,4 +1,4 @@
-import 'package:thespian/models/actor_brief.dart';
+import 'package:thespian/domain/models/actor_brief.dart';
 import 'package:thespian/models/common_transformers.dart';
 import 'package:thespian/tmdb/tmdb_person.dart';
 
