@@ -6,7 +6,7 @@ import 'package:thespian/features/popular_actors/popular_actor_view_model.dart';
 import 'package:thespian/features/search/popular_actor_transformer.dart';
 import 'package:thespian/features/search/search_view_model.dart';
 import 'package:thespian/mappers/search_transformer.dart';
-import 'package:thespian/services/service_locator.dart';
+import 'package:thespian/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/tmdb_image_configuration.dart';
 import 'package:thespian/tmdb/tmdb_search_service.dart';
