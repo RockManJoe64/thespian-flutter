@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:thespian/common/media_types.dart';
+import 'package:thespian/components/actor_info.dart';
 import 'package:thespian/components/actor_profile_image.dart';
-import 'package:thespian/features/popular_actors/actor_info.dart';
 import 'package:thespian/features/search/search_actor_controller.dart';
 
 class SearchActorResultsGridView extends StatelessWidget {
@@ -39,7 +40,7 @@ class SearchActorResultsGridView extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          if (searchResult.mediaType == 'person') {
+                          if (searchResult.mediaType == mediaTypePerson) {
                             final actor = controller.toPopularActor(searchResult);
                             Navigator.push(
                                 context,

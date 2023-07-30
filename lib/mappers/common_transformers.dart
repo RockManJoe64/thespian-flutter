@@ -1,5 +1,5 @@
-import 'package:thespian/models/movie_brief.dart';
-import 'package:thespian/models/tv_show_brief.dart';
+import 'package:thespian/domain/models/movie_brief.dart';
+import 'package:thespian/domain/models/tv_show_brief.dart';
 import 'package:thespian/tmdb/tmdb_known_for.dart';
 
 var defaultDateTime = DateTime(1900, 1, 1);

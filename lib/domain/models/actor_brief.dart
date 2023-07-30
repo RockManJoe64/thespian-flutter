@@ -1,5 +1,5 @@
-import 'movie_brief.dart';
-import 'tv_show_brief.dart';
+import 'package:thespian/domain/models/movie_brief.dart';
+import 'package:thespian/domain/models/tv_show_brief.dart';
 
 class ActorBrief {
   final bool adult;

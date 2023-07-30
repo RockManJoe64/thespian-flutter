@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:thespian/components/global_route_observer.dart';
 import 'package:thespian/features/popular_actors/home_page.dart';
-import 'package:thespian/services/service_locator.dart';
+import 'package:thespian/service_locator.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
