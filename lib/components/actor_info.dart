@@ -3,7 +3,7 @@ import 'package:thespian/components/actor_profile_image.dart';
 import 'package:thespian/components/backdrop_image.dart';
 import 'package:thespian/components/poster_image.dart';
 
-import 'popular_actor_view_model.dart';
+import '../features/popular_actors/popular_actor_view_model.dart';
 
 const badUrl = "https://foobar.com";
 

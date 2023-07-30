@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thespian/components/actor_profile_image.dart';
 
-import 'actor_info.dart';
+import '../../components/actor_info.dart';
 import 'grid_view_controller.dart';
 
 class PopularActorsGridView extends StatelessWidget {
