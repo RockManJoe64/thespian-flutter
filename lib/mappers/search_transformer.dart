@@ -4,7 +4,7 @@ import 'package:thespian/domain/models/movie_brief.dart';
 import 'package:thespian/domain/models/search_result.dart';
 import 'package:thespian/domain/models/tv_show_brief.dart';
 import 'package:thespian/mappers/common_transformers.dart';
-import 'package:thespian/tmdb/tmdb_search_result.dart';
+import 'package:thespian/tmdb/models/tmdb_search_result.dart';
 
 TVShowBrief _mapToTVShowBrief(TMDBSearchResult result) {
   return TVShowBrief(

@@ -1,6 +1,6 @@
 import 'package:thespian/common/image_path_utils.dart';
 import 'package:thespian/domain/models/search_result.dart';
-import 'package:thespian/tmdb/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
 
 class SearchViewModel {
   int id;

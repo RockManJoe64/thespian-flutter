@@ -1,6 +1,6 @@
 import 'package:thespian/domain/models/actor_brief.dart';
 import 'package:thespian/mappers/common_transformers.dart';
-import 'package:thespian/tmdb/tmdb_person.dart';
+import 'package:thespian/tmdb/models/tmdb_person.dart';
 
 List<ActorBrief> mapPopularPersonToActorBriefs(List<TMDBPerson> people, {bool sort = true}) {
   final List<ActorBrief> actorList = people

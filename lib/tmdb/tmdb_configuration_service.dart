@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:thespian/tmdb/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
 
 class TMDBConfigurationService {
   final http.Client client;

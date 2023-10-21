@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:thespian/mappers/person_transformer.dart';
 import 'package:thespian/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
-import 'package:thespian/tmdb/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
 import 'package:thespian/tmdb/tmdb_person_service.dart';
 
 import 'popular_actor_view_model.dart';

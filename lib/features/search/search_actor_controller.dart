@@ -8,7 +8,7 @@ import 'package:thespian/features/search/search_view_model.dart';
 import 'package:thespian/mappers/search_transformer.dart';
 import 'package:thespian/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
-import 'package:thespian/tmdb/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
 import 'package:thespian/tmdb/tmdb_search_service.dart';
 
 class SearchActorController extends ChangeNotifier {
