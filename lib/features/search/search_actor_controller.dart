@@ -5,10 +5,12 @@ import 'package:thespian/domain/models/search_result.dart';
 import 'package:thespian/features/popular_actors/popular_actor_view_model.dart';
 import 'package:thespian/features/search/popular_actor_transformer.dart';
 import 'package:thespian/features/search/search_view_model.dart';
+import 'package:thespian/mappers/person_transformer.dart';
 import 'package:thespian/mappers/search_transformer.dart';
 import 'package:thespian/service_locator.dart';
 import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/tmdb_person_service.dart';
 import 'package:thespian/tmdb/tmdb_search_service.dart';
 
 class SearchActorController extends ChangeNotifier {
@@ -21,11 +23,13 @@ class SearchActorController extends ChangeNotifier {
 
   final TMDBConfigurationService _tmdbConfigurationService = getIt<TMDBConfigurationService>();
   final TMDBSearchService _tmdbSearchService = getIt<TMDBSearchService>();
+  final TMDBPersonService _tmdbPersonService = getIt<TMDBPersonService>();
   TMDBImageConfiguration? _imageConfiguration;
   int _currentPage = 1;
   String _keyword = '';
 
   SearchActorController() {
+    _fetchTrendingPeople();
     searchTextEditingController.addListener(_textListener);
     scrollController.addListener(_scrollListener);
   }
@@ -96,6 +100,19 @@ class SearchActorController extends ChangeNotifier {
       _searchViewModels.clear();
     }
     _dataModels.addAll(dataModels);
+    _searchViewModels.addAll(viewModels);
+    notifyListeners();
+  }
+
+  void _fetchTrendingPeople({int page = 1}) async {
+    _imageConfiguration ??= await _tmdbConfigurationService.fetchImageConfiguration();
+    final response = await _tmdbPersonService.fetchTrendingPeople(page: page);
+    final dataModels = mapPopularPersonToActorBriefs(response);
+    final viewModels = dataModels.map<SearchViewModel>((dataModel) =>
+        SearchViewModel.fromActorBrief(_imageConfiguration!, dataModel))
+        .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
+        .toList();
+    _dataModels.addAll(mapFromActorBriefs(dataModels));
     _searchViewModels.addAll(viewModels);
     notifyListeners();
   }

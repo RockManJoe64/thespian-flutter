@@ -69,6 +69,18 @@ String _mapToName(TMDBSearchResult result) {
   }
 }
 
+String _mapToImagePath(TMDBSearchResult result) {
+  if (result.mediaType == mediaTypeMovie) {
+    return result.posterPath ?? '';
+  } else if (result.mediaType == mediaTypeTV) {
+    return result.posterPath ?? '';
+  } else if (result.mediaType == mediaTypePerson) {
+    return result.profilePath ?? '';
+  } else {
+    return '';
+  }
+}
+
 List<SearchResult> mapToSearchResults(List<TMDBSearchResult> results, {bool sort = true}) {
   final List<SearchResult> searchResults = results
       .where((r) =>
@@ -89,14 +101,14 @@ List<SearchResult> mapToSearchResults(List<TMDBSearchResult> results, {bool sort
   return searchResults;
 }
 
-String _mapToImagePath(TMDBSearchResult result) {
-  if (result.mediaType == mediaTypeMovie) {
-    return result.posterPath ?? '';
-  } else if (result.mediaType == mediaTypeTV) {
-    return result.posterPath ?? '';
-  } else if (result.mediaType == mediaTypePerson) {
-    return result.profilePath ?? '';
-  } else {
-    return '';
-  }
+List<SearchResult> mapFromActorBriefs(List<ActorBrief> actorBriefs, {bool sort = true}) {
+  final List<SearchResult> searchResults = actorBriefs.map((a) => SearchResult(
+    id: a.id,
+    name: a.name,
+    imagePath: a.profilePath,
+    mediaType: mediaTypePerson,
+    actorBrief: a,
+  )).toList();
+  if (sort) searchResults.sort((a, b) => a.name.compareTo(b.name));
+  return searchResults;
 }
