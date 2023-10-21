@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:thespian/tmdb/tmdb_person.dart';
-import 'package:thespian/tmdb/tmdb_search_result.dart';
+import 'package:thespian/tmdb/models/tmdb_person.dart';
+import 'package:thespian/tmdb/models/tmdb_search_result.dart';
 
 class TMDBSearchService {
   TMDBSearchService(this.client);

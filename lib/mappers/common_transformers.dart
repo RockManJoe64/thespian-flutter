@@ -1,6 +1,6 @@
 import 'package:thespian/domain/models/movie_brief.dart';
 import 'package:thespian/domain/models/tv_show_brief.dart';
-import 'package:thespian/tmdb/tmdb_known_for.dart';
+import 'package:thespian/tmdb/models/tmdb_known_for.dart';
 
 var defaultDateTime = DateTime(1900, 1, 1);
 const defaultIntValue = -1;
