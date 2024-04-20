@@ -47,7 +47,7 @@ class SearchActorController extends ChangeNotifier {
 
   void clear() {
     searchTextEditingController.clear();
-    _clearResults();
+    _fetchTrendingPeople();
   }
 
   /// Returns a [PopularActor] from the [SearchViewModel] with the given [id].
@@ -67,10 +67,10 @@ class SearchActorController extends ChangeNotifier {
     const debounceDuration = Duration(milliseconds: 500);
     Future.delayed(debounceDuration, () {
       _keyword = searchTextEditingController.text;
-      if (_keyword.isEmpty || _keyword.length < 3) {
-        _clearResults();
-        return;
-      }
+      // if (_keyword.isEmpty || _keyword.length < 3) {
+      //   _clearResults();
+      //   return;
+      // }
     });
   }
 
@@ -112,7 +112,9 @@ class SearchActorController extends ChangeNotifier {
         SearchViewModel.fromActorBrief(_imageConfiguration!, dataModel))
         .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
         .toList();
+    _dataModels.clear();
     _dataModels.addAll(mapFromActorBriefs(dataModels));
+    _searchViewModels.clear();
     _searchViewModels.addAll(viewModels);
     notifyListeners();
   }
