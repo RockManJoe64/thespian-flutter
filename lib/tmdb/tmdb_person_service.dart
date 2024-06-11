@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:thespian/tmdb/fetch_data_exception.dart';
 import 'package:thespian/tmdb/models/tmdb_person.dart';
 
 class TMDBPersonService {
@@ -25,7 +26,7 @@ class TMDBPersonService {
       final people = data.map((item) => TMDBPerson.fromJson(item)).toList();
       return people;
     } else {
-      throw Exception('Failed to load popular people');
+      throw FetchDataException('Failed to load popular people');
     }
   }
 
@@ -44,7 +45,7 @@ class TMDBPersonService {
       final people = data.map((item) => TMDBPerson.fromJson(item)).toList();
       return people;
     } else {
-      throw Exception('Failed to load trending people');
+      throw FetchDataException('Failed to load trending people');
     }
   }
 }
