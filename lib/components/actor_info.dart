@@ -8,7 +8,7 @@ import '../features/popular_actors/popular_actor_view_model.dart';
 const badUrl = "https://foobar.com";
 
 class PopularActorInfo extends StatelessWidget {
-  const PopularActorInfo({Key? key, required this.popularActor}) : super(key: key);
+  const PopularActorInfo({super.key, required this.popularActor});
 
   final PopularActor popularActor;
 
@@ -24,7 +24,7 @@ class PopularActorInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appearsIn = popularActor.appearsIn;
-    var backdropImageUrl = appearsIn.isNotEmpty ? appearsIn[0].backdropImageUrl! : badUrl;
+    var backdropImageUrl = appearsIn.isNotEmpty ? appearsIn[0].backdropImageUrl : badUrl;
     var posterImageUrls = _getPosterImageUrls();
     return Scaffold(
       appBar: AppBar(

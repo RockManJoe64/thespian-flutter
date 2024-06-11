@@ -4,10 +4,9 @@ import 'package:transparent_image/transparent_image.dart';
 
 class BackdropImage extends StatelessWidget {
   const BackdropImage({
-    Key? key,
+    super.key,
     required this.imageUrl,
-    this.opacity = 1.0,})
-      : super(key: key);
+    this.opacity = 1.0,});
 
   final String imageUrl;
   final double opacity;
