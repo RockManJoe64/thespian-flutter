@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:thespian/domain/models/search_result.dart';
-import 'package:thespian/features/popular_actors/popular_actor_view_model.dart';
+import 'package:thespian/domain/view_models/popular_actor_view_model.dart';
 import 'package:thespian/features/search/popular_actor_transformer.dart';
 import 'package:thespian/features/search/search_view_model.dart';
 import 'package:thespian/mappers/person_transformer.dart';
