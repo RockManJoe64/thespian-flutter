@@ -16,7 +16,18 @@ class PopularActorsGridView extends StatelessWidget {
       create: (context) => controller,
       child: Consumer<PopularActorsGridViewController>(
         builder: (context, controller, child) {
-          if (controller.popularActors.isEmpty) {
+          if (controller.errorMessage.isNotEmpty) {
+            return Center(child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(controller.errorMessage),
+                ElevatedButton(
+                  onPressed: controller.tryAgain,
+                  child: const Text('Try Again'),
+                ),
+              ],
+            ));
+          } else if (controller.popularActors.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           } else {
             return GridView.builder(
