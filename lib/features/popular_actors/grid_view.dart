@@ -8,7 +8,7 @@ import 'grid_view_controller.dart';
 class PopularActorsGridView extends StatelessWidget {
   final PopularActorsGridViewController controller;
 
-  const PopularActorsGridView({Key? key, required this.controller}) : super(key: key);
+  const PopularActorsGridView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

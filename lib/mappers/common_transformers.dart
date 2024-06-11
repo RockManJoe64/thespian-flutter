@@ -8,7 +8,7 @@ const defaultName = 'No Name';
 
 /// Convert a [String] to a [DateTime].
 DateTime parseDateTime(String? value) =>
-    value != null && value!.isNotEmpty ? DateTime.parse(value) : defaultDateTime;
+    value != null && value.isNotEmpty ? DateTime.parse(value) : defaultDateTime;
 
 List<MovieBrief> mapKnownForToMovies(List<TmdbKnownFor> knownFor) => knownFor
     .where((k) => k.mediaType == 'movie' && k.adult == false)

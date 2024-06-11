@@ -4,9 +4,8 @@ import 'package:transparent_image/transparent_image.dart';
 
 class PosterImage extends StatelessWidget {
   const PosterImage({
-    Key? key,
-    required this.imageUrl})
-      : super(key: key);
+    super.key,
+    required this.imageUrl});
 
   final String imageUrl;
 

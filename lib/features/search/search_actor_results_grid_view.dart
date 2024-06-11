@@ -8,8 +8,7 @@ import 'package:thespian/features/search/search_actor_controller.dart';
 class SearchActorResultsGridView extends StatelessWidget {
   final SearchActorController controller;
 
-  const SearchActorResultsGridView({Key? key, required this.controller})
-      : super(key: key);
+  const SearchActorResultsGridView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

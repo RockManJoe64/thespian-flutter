@@ -4,11 +4,10 @@ import 'package:transparent_image/transparent_image.dart';
 
 class ActorProfileImage extends StatelessWidget {
   const ActorProfileImage({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.width,
-    required this.height})
-      : super(key: key);
+    required this.height});
 
   final String imageUrl;
   final double width;
