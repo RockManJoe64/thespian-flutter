@@ -1,6 +1,14 @@
-# thespian
+# Thespian
 
-A new Flutter project.
+A Flutter application that allows you to search for actors and actresses from your favorite movies and TV shows. The app uses the [The Movie Database API](https://www.themoviedb.org/documentation/api) to fetch the data.
+
+### Prerequisites
+
+Go to the [The Movie Database API](https://developer.themoviedb.org/docs/getting-started) and read the instructions to get an API key.
+
+One you have your API key and token, copy the file `sample.env` into a `.env` file in the root directory of the project and add your API key/token.
+
+```
 
 ## Getting Started
 
