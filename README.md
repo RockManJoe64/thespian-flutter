@@ -8,8 +8,6 @@ Go to the [The Movie Database API](https://developer.themoviedb.org/docs/getting
 
 One you have your API key and token, copy the file `sample.env` into a `.env` file in the root directory of the project and add your API key/token.
 
-```
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
@@ -30,3 +28,8 @@ To uninstall the app from the device, run the following command:
 ```bash
 adb uninstall com.trespassstudio.thespian
 ```
+
+## Figma Design
+
+The end design can be previewed on [Figma](https://www.figma.com/proto/QFPFbznR44op5jaNlagT1a/Thespian-App?page-id=0%3A1&node-id=14-132&node-type=canvas&viewport=660%2C668%2C0.56&t=5FS6VuVV6mcF4xv4-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=14%3A132).
+
