@@ -1,6 +1,6 @@
 import 'package:thespian/common/image_path_utils.dart';
 import 'package:thespian/domain/models/search_result.dart';
-import 'package:thespian/features/popular_actors/popular_actor_view_model.dart';
+import 'package:thespian/domain/view_models/popular_actor_view_model.dart';
 import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
 
 PopularActor mapToPopularActor(TMDBImageConfiguration config, SearchResult searchResult) {
