@@ -49,4 +49,4 @@ app.*.map.json
 *.mocks.dart
 
 # Env files
-*.env
+.env
