@@ -26,7 +26,7 @@ samples, guidance on mobile development, and a full API reference.
 To uninstall the app from the device, run the following command:
 
 ```bash
-adb uninstall com.trespassstudio.thespian
+adb uninstall studio.trespass.dev.thespian
 ```
 
 ## Figma Design
