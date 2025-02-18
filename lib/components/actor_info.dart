@@ -5,7 +5,7 @@ import 'package:thespian/components/poster_image.dart';
 
 import '../features/popular_actors/popular_actor_view_model.dart';
 
-const badUrl = "https://foobar.com";
+const badUrl = 'https://foobar.com';
 
 class PopularActorInfo extends StatelessWidget {
   const PopularActorInfo({super.key, required this.popularActor});

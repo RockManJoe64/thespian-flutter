@@ -55,7 +55,7 @@ class PopularActorsGridViewController extends ChangeNotifier {
     } on FetchDataException catch (_) {
       _errorMessage = "Unfortunately, we couldn't load the actors. Please try again.";
     } catch (e) {
-      _errorMessage = "Oops! Something broke. Please try again.";
+      _errorMessage = 'Oops! Something broke. Please try again.';
     } finally {
       notifyListeners();
     }
