@@ -5,9 +5,7 @@ class Actor {
   DateTime? birthday;
   DateTime? deathday;
   Gender gender;
-  String? homepage;
-  int id;
-  String? imdbId;
+  int tmdbId;
   String name;
   String? placeOfBirth;
   double popularity;
@@ -18,9 +16,7 @@ class Actor {
     this.birthday,
     this.deathday,
     required this.gender,
-    this.homepage,
-    required this.id,
-    this.imdbId,
+    required this.tmdbId,
     required this.name,
     this.placeOfBirth,
     required this.popularity,

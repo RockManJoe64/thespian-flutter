@@ -61,8 +61,6 @@ final popularPersons = [
     ],
     knownForDepartment: 'acting',
     name: 'name',
-    page: 1,
-    popularity: 0,
     profilePath: '/profilePath',
   )
 ];

@@ -50,7 +50,7 @@ class SearchActorController extends ChangeNotifier {
     _fetchTrendingPeople();
   }
 
-  /// Returns a [PopularActor] from the [SearchViewModel] with the given [id].
+  /// Returns a [PopularActor] from the [SearchViewModel] with the given [tmdbId].
   /// This is needed to support displaying a Person result using the [PopularActorInfo] widget.
   PopularActor toPopularActor(SearchViewModel searchViewModel) {
     final searchResult = _dataModels.firstWhere((dataModel) => dataModel.id == searchViewModel.id);
@@ -104,9 +104,9 @@ class SearchActorController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _fetchTrendingPeople({int page = 1}) async {
+  void _fetchTrendingPeople() async {
     _imageConfiguration ??= await _tmdbConfigurationService.fetchImageConfiguration();
-    final response = await _tmdbPersonService.fetchTrendingPeople(page: page);
+    final response = await _tmdbPersonService.fetchTrendingPeople();
     final dataModels = mapPopularPersonToActorBriefs(response);
     final viewModels = dataModels.map<SearchViewModel>((dataModel) =>
         SearchViewModel.fromActorBrief(_imageConfiguration!, dataModel))

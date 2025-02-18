@@ -12,11 +12,11 @@ class TMDBPersonService {
   TMDBPersonService(this.client);
 
   Future<List<TMDBPerson>> fetchPopularPeople({int page = 1}) async {
-    final apiKey = dotenv.env['TMDB_AUTH_TOKEN'];
+    final apiToken = dotenv.env['TMDB_AUTH_TOKEN'];
     final response = await client.get(
         Uri.parse('https://api.themoviedb.org/3/person/popular?page=$page'),
         headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+          HttpHeaders.authorizationHeader: 'Bearer $apiToken',
           HttpHeaders.acceptHeader: 'application/json',
         });
 
@@ -30,12 +30,12 @@ class TMDBPersonService {
     }
   }
 
-  Future<List<TMDBPerson>> fetchTrendingPeople({int page = 1}) async {
-    final apiKey = dotenv.env['TMDB_AUTH_TOKEN'];
+  Future<List<TMDBPerson>> fetchTrendingPeople() async {
+    final apiToken = dotenv.env['TMDB_AUTH_TOKEN'];
     final response = await client.get(
-        Uri.parse('https://api.themoviedb.org/3/trending/person/day?page=$page'),
+        Uri.parse('https://api.themoviedb.org/3/trending/person/day'),
         headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+          HttpHeaders.authorizationHeader: 'Bearer $apiToken',
           HttpHeaders.acceptHeader: 'application/json',
         });
 

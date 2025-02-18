@@ -1,0 +1,40 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "id": 500,
+      "name": "Tom Cruise",
+      "original_name": "Tom Cruise",
+      "media_type": "person",
+      "adult": false,
+      "popularity": 156.86,
+      "gender": 2,
+      "known_for_department": "Acting",
+      "profile_path": "/8qBylBsQf4llkGrWR3qAsOtOU8O.jpg"
+    },
+    {
+      "id": 11701,
+      "name": "Angelina Jolie",
+      "original_name": "Angelina Jolie",
+      "media_type": "person",
+      "adult": false,
+      "popularity": 75.877,
+      "gender": 1,
+      "known_for_department": "Acting",
+      "profile_path": "/bXNxIKcJ5cNNW8QFrBPWcfTSu9x.jpg"
+    },
+    {
+      "id": 110,
+      "name": "Viggo Mortensen",
+      "original_name": "Viggo Mortensen",
+      "media_type": "person",
+      "adult": false,
+      "popularity": 37.305,
+      "gender": 2,
+      "known_for_department": "Acting",
+      "profile_path": "/vH5gVSpHAMhDaFWfh0Q7BG61O1y.jpg"
+    }
+  ],
+  "total_pages": 196,
+  "total_results": 3911
+}
