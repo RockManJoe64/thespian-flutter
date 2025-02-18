@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,14 +13,30 @@ import 'tmdb_search_service_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() {
-  dotenv.testLoad(fileInput: '''TMDB_API_KEY=1234
-''');
+  dotenv.testLoad(
+    fileInput: '''
+TMDB_API_KEY=1234
+TMDB_AUTH_TOKEN=5678
+''',
+  );
   group('searchPeopleByKeyword', () {
+    late Map<String, String> headers;
+
+    setUpAll(() {
+      headers = {
+        HttpHeaders.authorizationHeader: 'Bearer 5678',
+        HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.contentTypeHeader: 'application/json',
+      };
+    });
+
     test('returns a list of actors upon successful search', () async {
       // Arrange
+      final uri = Uri.parse('https://api.themoviedb.org/3/search/person?query=actor&language=en-US&region=US&page=1');
       final client = MockClient();
-      when(client.get(Uri.parse('https://api.themoviedb.org/3/search/person?query=actor&api_key=1234&language=en-US&region=US&page=1')))
-          .thenAnswer((_) async => http.Response(jsonEncode(searchPersonResponseBody), 200));
+      when(
+        client.get(uri, headers: headers),
+      ).thenAnswer((_) async => http.Response(jsonEncode(searchPersonResponseBody), 200));
 
       final service = TMDBSearchService(client);
 
@@ -49,8 +66,12 @@ void main() {
     test('should return an exception when API returns 401', () async {
       // Arrange
       final client = MockClient();
-      when(client.get(Uri.parse('https://api.themoviedb.org/3/search/person?query=actor&api_key=1234&language=en-US&region=US&page=1')))
-          .thenAnswer((_) async => http.Response('Unauthorized', 401));
+      when(
+        client.get(
+          Uri.parse('https://api.themoviedb.org/3/search/person?query=actor&language=en-US&region=US&page=1'),
+          headers: headers,
+        ),
+      ).thenAnswer((_) async => http.Response('Unauthorized', 401));
 
       final service = TMDBSearchService(client);
 
@@ -64,8 +85,12 @@ void main() {
     test('should return an exception when API returns 404', () async {
       // Arrange
       final client = MockClient();
-      when(client.get(Uri.parse('https://api.themoviedb.org/3/search/person?query=actor&api_key=1234&language=en-US&region=US&page=1')))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
+      when(
+        client.get(
+          Uri.parse('https://api.themoviedb.org/3/search/person?query=actor&language=en-US&region=US&page=1'),
+          headers: headers,
+        ),
+      ).thenAnswer((_) async => http.Response('Not Found', 404));
 
       final service = TMDBSearchService(client);
 

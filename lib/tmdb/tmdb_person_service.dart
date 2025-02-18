@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:thespian/tmdb/fetch_data_exception.dart';
 import 'package:thespian/tmdb/models/tmdb_person.dart';
+import 'package:thespian/tmdb/tmdb_authentication.dart';
 
 class TMDBPersonService {
   final http.Client client;
@@ -12,13 +11,10 @@ class TMDBPersonService {
   TMDBPersonService(this.client);
 
   Future<List<TMDBPerson>> fetchPopularPeople({int page = 1}) async {
-    final apiToken = dotenv.env['TMDB_AUTH_TOKEN'];
-    final response = await client.get(
-        Uri.parse('https://api.themoviedb.org/3/person/popular?page=$page'),
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $apiToken',
-          HttpHeaders.acceptHeader: 'application/json',
-        });
+    final headers = getAuthenticatedHeaders();
+    final queryParameters = {'page': page.toString()};
+    final uri = Uri.https('api.themoviedb.org', '3/person/popular', queryParameters);
+    final response = await client.get(uri, headers: headers);
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
@@ -31,13 +27,9 @@ class TMDBPersonService {
   }
 
   Future<List<TMDBPerson>> fetchTrendingPeople() async {
-    final apiToken = dotenv.env['TMDB_AUTH_TOKEN'];
-    final response = await client.get(
-        Uri.parse('https://api.themoviedb.org/3/trending/person/day'),
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $apiToken',
-          HttpHeaders.acceptHeader: 'application/json',
-        });
+    final headers = getAuthenticatedHeaders();
+    final uri = Uri.https('api.themoviedb.org', '3/trending/person/day');
+    final response = await client.get(uri, headers: headers);
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);

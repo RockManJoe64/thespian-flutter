@@ -11,42 +11,44 @@ import 'package:thespian/tmdb/tmdb_person_service.dart';
 import 'tmdb_person_service_test.mocks.dart';
 
 Future<String> readJsonFile(String fileName) async {
-  final filePath = path.join(Directory.current.path,
-      'test',
-      'tmdb',
-      'data',
-      fileName);
+  final filePath = path.join(Directory.current.path, 'test', 'tmdb', 'data', fileName);
   final file = File(filePath);
   final content = await file.readAsString();
   return content
       .replaceAll('\u2014', '-') // Normalize character 8212 (EM DASH) to hyphen '-'
-      .replaceAll('\u2019', '\''); // Normalize character 8217 (RIGHT SINGLE QUOTATION MARK) to apostrophe/single quote '''
+      .replaceAll(
+        '\u2019',
+        '\'',
+      ); // Normalize character 8217 (RIGHT SINGLE QUOTATION MARK) to apostrophe/single quote '''
 }
 
 @GenerateMocks([http.Client])
 void main() {
-  dotenv.testLoad(fileInput: '''
+  dotenv.testLoad(
+    fileInput: '''
 TMDB_API_KEY=1234
 TMDB_AUTH_TOKEN=5678
-''');
+''',
+  );
 
   group('fetchPopularPeople', () {
     late String responseBody;
+    late Map<String, String> headers;
 
     setUpAll(() async {
       responseBody = await readJsonFile('tmdb_popular_person_response.json');
+      headers = {
+        HttpHeaders.authorizationHeader: 'Bearer 5678',
+        HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.contentTypeHeader: 'application/json',
+      };
     });
 
     test('returns a list of actors', () async {
       // Arrange
       final uri = Uri.parse('https://api.themoviedb.org/3/person/popular?page=1');
-      final headers = {
-        HttpHeaders.authorizationHeader: 'Bearer 5678',
-        HttpHeaders.acceptHeader: 'application/json',
-      };
       final client = MockClient();
-      when(client.get(uri, headers: headers))
-          .thenAnswer((_) async => http.Response(responseBody, 200));
+      when(client.get(uri, headers: headers)).thenAnswer((_) async => http.Response(responseBody, 200));
 
       final service = TMDBPersonService(client);
 
@@ -76,13 +78,10 @@ TMDB_AUTH_TOKEN=5678
     test('throws an exception if the API call fails', () async {
       // Arrange
       final uri = Uri.parse('https://api.themoviedb.org/3/person/popular?page=1');
-      final headers = {
-        HttpHeaders.authorizationHeader: 'Bearer 5678',
-        HttpHeaders.acceptHeader: 'application/json',
-      };
       final client = MockClient();
-      when(client.get(uri, headers: headers))
-          .thenAnswer((_) async => http.Response('Failed to load popular actors', 500));
+      when(
+        client.get(uri, headers: headers),
+      ).thenAnswer((_) async => http.Response('Failed to load popular actors', 500));
 
       final service = TMDBPersonService(client);
 
@@ -104,10 +103,10 @@ TMDB_AUTH_TOKEN=5678
       final headers = {
         HttpHeaders.authorizationHeader: 'Bearer 5678',
         HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.contentTypeHeader: 'application/json',
       };
       final client = MockClient();
-      when(client.get(uri, headers: headers))
-          .thenAnswer((_) async => http.Response(responseBody, 200));
+      when(client.get(uri, headers: headers)).thenAnswer((_) async => http.Response(responseBody, 200));
 
       final service = TMDBPersonService(client);
 
@@ -139,10 +138,12 @@ TMDB_AUTH_TOKEN=5678
       final headers = {
         HttpHeaders.authorizationHeader: 'Bearer 5678',
         HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.contentTypeHeader: 'application/json',
       };
       final client = MockClient();
-      when(client.get(uri, headers: headers))
-          .thenAnswer((_) async => http.Response('Failed to load popular actors', 500));
+      when(
+        client.get(uri, headers: headers),
+      ).thenAnswer((_) async => http.Response('Failed to load popular actors', 500));
     });
   });
 }
