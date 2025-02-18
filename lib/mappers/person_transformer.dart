@@ -22,3 +22,24 @@ List<ActorBrief> mapPopularPersonToActorBriefs(List<TMDBPerson> people, {bool so
   if (sort) actorList.sort((a, b) => a.name.compareTo(b.name));
   return actorList;
 }
+
+// List<Actor> mapPersonToActor(List<TMDBPerson> people, {bool sort = false}) {
+//   final List<Actor> actorList = people
+//       .where((p) =>
+//   p.id != null && (p.name?.isNotEmpty ?? false) && p.adult == false)
+//       .map<Actor>((p) =>
+//       Actor(
+//         biography: p.,
+//         this.birthday,
+//         this.deathday,
+//         required this.gender,
+//         required this.tmdbId,
+//         required this.name,
+//         this.placeOfBirth,
+//         required this.popularity,
+//         required this.profileImageUrl,
+//       ))
+//       .toList();
+//   if (sort) actorList.sort((a, b) => a.name.compareTo(b.name));
+//   return actorList;
+// }
