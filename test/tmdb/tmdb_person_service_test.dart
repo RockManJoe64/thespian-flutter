@@ -5,22 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:path/path.dart' as path;
 import 'package:thespian/tmdb/tmdb_person_service.dart';
 
+import 'data/loaders.dart';
 import 'tmdb_person_service_test.mocks.dart';
-
-Future<String> readJsonFile(String fileName) async {
-  final filePath = path.join(Directory.current.path, 'test', 'tmdb', 'data', fileName);
-  final file = File(filePath);
-  final content = await file.readAsString();
-  return content
-      .replaceAll('\u2014', '-') // Normalize character 8212 (EM DASH) to hyphen '-'
-      .replaceAll(
-        '\u2019',
-        '\'',
-      ); // Normalize character 8217 (RIGHT SINGLE QUOTATION MARK) to apostrophe/single quote '''
-}
 
 @GenerateMocks([http.Client])
 void main() {

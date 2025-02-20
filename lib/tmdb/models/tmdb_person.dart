@@ -25,10 +25,10 @@ class TMDBPerson with _$TMDBPerson {
     List<TmdbKnownFor>? knownFor, // Specific to popular people endpoint.
     String? knownForDepartment,
     String? name,
+    String? originalName,
     double? popularity, // Specific to popular, trending people endpoint.
     String? profilePath,
   }) = _TMDBPerson;
 
-  factory TMDBPerson.fromJson(Map<String, dynamic> json) =>
-      _$TMDBPersonFromJson(json);
+  factory TMDBPerson.fromJson(Map<String, dynamic> json) => _$TMDBPersonFromJson(json);
 }
