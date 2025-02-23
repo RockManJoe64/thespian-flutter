@@ -8,8 +8,8 @@ import 'package:thespian/features/search/search_view_model.dart';
 import 'package:thespian/mappers/person_transformer.dart';
 import 'package:thespian/mappers/search_transformer.dart';
 import 'package:thespian/service_locator.dart';
-import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/tmdb_configuration_service.dart';
 import 'package:thespian/tmdb/tmdb_person_service.dart';
 import 'package:thespian/tmdb/tmdb_search_service.dart';
 
@@ -50,7 +50,7 @@ class SearchActorController extends ChangeNotifier {
     _fetchTrendingPeople();
   }
 
-  /// Returns a [PopularActor] from the [SearchViewModel] with the given [id].
+  /// Returns a [PopularActor] from the [SearchViewModel] with the given [tmdbId].
   /// This is needed to support displaying a Person result using the [PopularActorInfo] widget.
   PopularActor toPopularActor(SearchViewModel searchViewModel) {
     final searchResult = _dataModels.firstWhere((dataModel) => dataModel.id == searchViewModel.id);
@@ -75,8 +75,7 @@ class SearchActorController extends ChangeNotifier {
   }
 
   void _scrollListener() {
-    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
-        !scrollController.position.outOfRange) {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent && !scrollController.position.outOfRange) {
       _currentPage++;
       _performSearch(page: _currentPage);
     }
@@ -91,10 +90,11 @@ class SearchActorController extends ChangeNotifier {
     _imageConfiguration ??= await _tmdbConfigurationService.fetchImageConfiguration();
     final response = await _tmdbSearchService.searchAnyByKeyword(_keyword, page: page);
     final dataModels = mapToSearchResults(response, sort: false);
-    final viewModels = dataModels.map<SearchViewModel>((dataModel) =>
-        SearchViewModel.fromSearchResult(_imageConfiguration!, dataModel))
-        .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
-        .toList();
+    final viewModels =
+        dataModels
+            .map<SearchViewModel>((dataModel) => SearchViewModel.fromSearchResult(_imageConfiguration!, dataModel))
+            .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
+            .toList();
     if (page == 1) {
       _dataModels.clear();
       _searchViewModels.clear();
@@ -104,16 +104,17 @@ class SearchActorController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _fetchTrendingPeople({int page = 1}) async {
+  void _fetchTrendingPeople() async {
     _imageConfiguration ??= await _tmdbConfigurationService.fetchImageConfiguration();
-    final response = await _tmdbPersonService.fetchTrendingPeople(page: page);
-    final dataModels = mapPopularPersonToActorBriefs(response);
-    final viewModels = dataModels.map<SearchViewModel>((dataModel) =>
-        SearchViewModel.fromActorBrief(_imageConfiguration!, dataModel))
-        .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
-        .toList();
+    final response = await _tmdbPersonService.fetchTrendingPeople();
+    final dataModels = mapTrendingPersonsToActors(response);
+    final viewModels =
+        dataModels
+            .map<SearchViewModel>((dataModel) => SearchViewModel.fromActor(_imageConfiguration!, dataModel))
+            .where((searchResult) => searchResult.containsSmallImage && searchResult.containsLargeImage)
+            .toList();
     _dataModels.clear();
-    _dataModels.addAll(mapFromActorBriefs(dataModels));
+    _dataModels.addAll(mapFromActors(dataModels));
     _searchViewModels.clear();
     _searchViewModels.addAll(viewModels);
     notifyListeners();

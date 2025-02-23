@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:thespian/tmdb/models/tmdb_image_configuration.dart';
+import 'package:thespian/tmdb/tmdb_authentication.dart';
+
+import 'fetch_data_exception.dart';
 
 class TMDBConfigurationService {
   final http.Client client;
@@ -10,8 +12,9 @@ class TMDBConfigurationService {
   TMDBConfigurationService(this.client);
 
   Future<TMDBImageConfiguration> fetchImageConfiguration() async {
-    final apiKey = dotenv.env['TMDB_API_KEY'];
-    final response = await client.get(Uri.parse('https://api.themoviedb.org/3/configuration?api_key=$apiKey'));
+    final headers = getAuthenticatedHeaders();
+    final uri = Uri.https('api.themoviedb.org', '3/configuration');
+    final response = await client.get(uri, headers: headers);
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
@@ -19,7 +22,7 @@ class TMDBConfigurationService {
       final configuration = TMDBImageConfiguration.fromJson(data);
       return configuration;
     } else {
-      throw Exception('Failed to load TMDB configuration');
+      throw FetchDataException('Failed to load TMDB configuration');
     }
   }
 }

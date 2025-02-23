@@ -28,11 +28,19 @@ class PopularActor {
     final movies = AppearsIn.fromMoviesKnownFor(config, actorBrief.moviesKnownFor!);
     final tvShows = AppearsIn.fromTvShowsKnownFor(config, actorBrief.tvShowsKnownFor!);
     return PopularActor(
-      id: actorBrief.id,
-      name: actorBrief.name,
-      popularity: actorBrief.popularity,
-      smallProfileImageUrl: parseImagePath(config.secureBaseUrl, config.profileSizes[smallProfileImageSizeIndex], actorBrief.profilePath),
-      largeProfileImageUrl: parseImagePath(config.secureBaseUrl, config.profileSizes[largeProfileImageSizeIndex], actorBrief.profilePath),
+      id: actorBrief.actor.tmdbId,
+      name: actorBrief.actor.name,
+      popularity: actorBrief.actor.popularity,
+      smallProfileImageUrl: parseImagePath(
+        config.secureBaseUrl,
+        config.profileSizes[smallProfileImageSizeIndex],
+        actorBrief.actor.profileImageUrl,
+      ),
+      largeProfileImageUrl: parseImagePath(
+        config.secureBaseUrl,
+        config.profileSizes[largeProfileImageSizeIndex],
+        actorBrief.actor.profileImageUrl,
+      ),
       appearsIn: [...movies, ...tvShows],
     );
   }
@@ -62,30 +70,54 @@ class AppearsIn {
   });
 
   static fromMoviesKnownFor(TMDBImageConfiguration config, List<MovieBrief> movies) {
-    return movies.map((movie) => AppearsIn(
-      id: movie.id,
-      mediaType: movie.mediaType,
-      originCountry: null,
-      overview: movie.overview,
-      posterImageUrl: parseImagePath(config.secureBaseUrl, config.posterSizes[posterImageSizeIndex], movie.posterPath),
-      backdropImageUrl: parseImagePath(config.secureBaseUrl, config.backdropSizes[backdropImageSizeIndex], movie.backdropPath),
-      releaseOrFirstAirDate: movie.releaseDate,
-      titleOrName: movie.title,
-      voteAverage: movie.voteAverage,
-    )).toList();
+    return movies
+        .map(
+          (movie) => AppearsIn(
+            id: movie.id,
+            mediaType: movie.mediaType,
+            originCountry: null,
+            overview: movie.overview,
+            posterImageUrl: parseImagePath(
+              config.secureBaseUrl,
+              config.posterSizes[posterImageSizeIndex],
+              movie.posterPath,
+            ),
+            backdropImageUrl: parseImagePath(
+              config.secureBaseUrl,
+              config.backdropSizes[backdropImageSizeIndex],
+              movie.backdropPath,
+            ),
+            releaseOrFirstAirDate: movie.releaseDate,
+            titleOrName: movie.title,
+            voteAverage: movie.voteAverage,
+          ),
+        )
+        .toList();
   }
 
   static fromTvShowsKnownFor(TMDBImageConfiguration config, List<TVShowBrief> tvShows) {
-    return tvShows.map((tvShow) => AppearsIn(
-      id: tvShow.id,
-      mediaType: tvShow.mediaType,
-      originCountry: tvShow.originCountry,
-      overview: tvShow.overview,
-      posterImageUrl: parseImagePath(config.secureBaseUrl, config.posterSizes[posterImageSizeIndex], tvShow.posterPath),
-      backdropImageUrl: parseImagePath(config.secureBaseUrl, config.backdropSizes[backdropImageSizeIndex], tvShow.backdropPath),
-      releaseOrFirstAirDate: tvShow.firstAirDate,
-      titleOrName: tvShow.name,
-      voteAverage: tvShow.voteAverage,
-    )).toList();
+    return tvShows
+        .map(
+          (tvShow) => AppearsIn(
+            id: tvShow.id,
+            mediaType: tvShow.mediaType,
+            originCountry: tvShow.originCountry,
+            overview: tvShow.overview,
+            posterImageUrl: parseImagePath(
+              config.secureBaseUrl,
+              config.posterSizes[posterImageSizeIndex],
+              tvShow.posterPath,
+            ),
+            backdropImageUrl: parseImagePath(
+              config.secureBaseUrl,
+              config.backdropSizes[backdropImageSizeIndex],
+              tvShow.backdropPath,
+            ),
+            releaseOrFirstAirDate: tvShow.firstAirDate,
+            titleOrName: tvShow.name,
+            voteAverage: tvShow.voteAverage,
+          ),
+        )
+        .toList();
   }
 }

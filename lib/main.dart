@@ -5,7 +5,7 @@ import 'package:thespian/features/popular_actors/home_page.dart';
 import 'package:thespian/service_locator.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: '.env');
   setupServiceLocator();
   runApp(const ThespianApp());
 }

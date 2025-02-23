@@ -20,7 +20,7 @@ class TmdbKnownFor with _$TmdbKnownFor {
     String? posterPath,
     String? releaseDate,
     String? title,
-    bool? hasVideo,
+    @JsonKey(name: 'video') bool? hasVideo,
     double? voteAverage,
     int? voteCount,
     String? firstAirDate,
@@ -29,6 +29,5 @@ class TmdbKnownFor with _$TmdbKnownFor {
     List<String>? originCountry,
   }) = _TmdbKnownFor;
 
-  factory TmdbKnownFor.fromJson(Map<String, dynamic> json) =>
-      _$TmdbKnownForFromJson(json);
+  factory TmdbKnownFor.fromJson(Map<String, dynamic> json) => _$TmdbKnownForFromJson(json);
 }

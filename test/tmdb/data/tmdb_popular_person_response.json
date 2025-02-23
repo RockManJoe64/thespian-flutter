@@ -1,0 +1,156 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "gender": 2,
+      "id": 2786960,
+      "known_for_department": "Acting",
+      "name": "Gabriel Guevara",
+      "original_name": "Gabriel Guevara",
+      "popularity": 117.961,
+      "profile_path": "/pviRYKEEmoPUfLYwP1VHJ6LQcRg.jpg",
+      "known_for": [
+        {
+          "backdrop_path": "/lntyt4OVDbcxA1l7LtwITbrD3FI.jpg",
+          "id": 1010581,
+          "title": "My Fault",
+          "original_title": "Culpa mía",
+          "overview": "Noah must leave her city, boyfriend, and friends to move into William Leister's mansion, the flashy and wealthy husband of her mother Rafaela. As a proud and independent 17 year old, Noah resists living in a mansion surrounded by luxury. However, it is there where she meets Nick, her new stepbrother, and the clash of their strong personalities becomes evident from the very beginning.",
+          "poster_path": "/w46Vw536HwNnEzOa7J24YH9DPRS.jpg",
+          "media_type": "movie",
+          "adult": false,
+          "original_language": "es",
+          "genre_ids": [
+            10749,
+            18
+          ],
+          "popularity": 591.211,
+          "release_date": "2023-06-08",
+          "video": false,
+          "vote_average": 7.842,
+          "vote_count": 3530
+        },
+        {
+          "backdrop_path": "/k24eZq5I3jyz4htPkZCRpnUmBzE.jpg",
+          "id": 1156593,
+          "title": "Your Fault",
+          "original_title": "Culpa tuya",
+          "overview": "The love between Noah and Nick seems unwavering despite their parents' attempts to separate them. But his job and her entry into college open up their lives to new relationships that will shake the foundations of both their relationship and the Leister family itself.",
+          "poster_path": "/1sQA7lfcF9yUyoLYC0e6Zo3jmxE.jpg",
+          "media_type": "movie",
+          "adult": false,
+          "original_language": "es",
+          "genre_ids": [
+            10749,
+            18
+          ],
+          "popularity": 436.142,
+          "release_date": "2024-12-26",
+          "video": false,
+          "vote_average": 7.139,
+          "vote_count": 1042
+        },
+        {
+          "backdrop_path": "/ieiq46OoeTrLkjtclmhii6iRyzP.jpg",
+          "id": 242876,
+          "name": "Raising Voices",
+          "original_name": "Ni una más",
+          "overview": "When a 17-year-old reports a sexual assault at her high school, an investigation upends her life and tests her relationships.",
+          "poster_path": "/lCU77Jp0iWN2e1WuSJvR7M35ebN.jpg",
+          "media_type": "tv",
+          "adult": false,
+          "original_language": "es",
+          "genre_ids": [
+            18
+          ],
+          "popularity": 97.939,
+          "first_air_date": "2024-05-31",
+          "vote_average": 7.815,
+          "vote_count": 379,
+          "origin_country": [
+            "ES"
+          ]
+        }
+      ]
+    },
+    {
+      "adult": false,
+      "gender": 1,
+      "id": 974169,
+      "known_for_department": "Acting",
+      "name": "Jenna Ortega",
+      "original_name": "Jenna Ortega",
+      "popularity": 106.051,
+      "profile_path": "/q1NRzyZQlYkxLY07GO9NVPkQnu8.jpg",
+      "known_for": [
+        {
+          "backdrop_path": "/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
+          "id": 119051,
+          "name": "Wednesday",
+          "original_name": "Wednesday",
+          "overview": "Wednesday Addams is sent to Nevermore Academy, a bizarre boarding school where she attempts to master her psychic powers, stop a monstrous killing spree of the town citizens, and solve the supernatural mystery that affected her family 25 years ago — all while navigating her new relationships.",
+          "poster_path": "/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
+          "media_type": "tv",
+          "adult": false,
+          "original_language": "en",
+          "genre_ids": [
+            10765,
+            9648,
+            35
+          ],
+          "popularity": 163.807,
+          "first_air_date": "2022-11-23",
+          "vote_average": 8.435,
+          "vote_count": 8871,
+          "origin_country": [
+            "US"
+          ]
+        },
+        {
+          "backdrop_path": "/70Rm9ItxKuEKN8iu6rNjfwAYUCJ.jpg",
+          "id": 760104,
+          "title": "X",
+          "original_title": "X",
+          "overview": "In 1979, a group of young filmmakers set out to make an adult film in rural Texas, but when their reclusive, elderly hosts catch them in the act, the cast find themselves fighting for their lives.",
+          "poster_path": "/lopZSVtXzhFY603E9OqF7O1YKsh.jpg",
+          "media_type": "movie",
+          "adult": false,
+          "original_language": "en",
+          "genre_ids": [
+            27,
+            9648,
+            53
+          ],
+          "popularity": 54.537,
+          "release_date": "2022-03-17",
+          "video": false,
+          "vote_average": 6.7,
+          "vote_count": 3401
+        },
+        {
+          "backdrop_path": "/ifUfE79O1raUwbaQRIB7XnFz5ZC.jpg",
+          "id": 646385,
+          "title": "Scream",
+          "original_title": "Scream",
+          "overview": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
+          "poster_path": "/1m3W6cpgwuIyjtg5nSnPx7yFkXW.jpg",
+          "media_type": "movie",
+          "adult": false,
+          "original_language": "en",
+          "genre_ids": [
+            27,
+            9648
+          ],
+          "popularity": 58.863,
+          "release_date": "2022-01-12",
+          "video": false,
+          "vote_average": 6.666,
+          "vote_count": 3381
+        }
+      ]
+    }
+  ],
+  "total_pages": 194033,
+  "total_results": 3880648
+}

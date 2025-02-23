@@ -1,4 +1,4 @@
-const searchMultiResponse = {
+{
   "page": 1,
   "results": [
     {
@@ -57,7 +57,7 @@ const searchMultiResponse = {
           "title": "The Terminator",
           "original_language": "en",
           "original_title": "The Terminator",
-          "overview": "In the post-apocalyptic future, reigning tyrannical supercomputers teleport a cyborg assassin known as the \"Terminator\" back to 1984 to kill Sarah Connor, whose unborn son is destined to lead insurgents against 21st century mechanical hegemony. Meanwhile, the human-resistance movement dispatches a lone warrior to safeguard Sarah. Can he stop the virtually indestructible killing machine?",
+          "overview": "In the post-apocalyptic future, reigning tyrannical supercomputers teleport a cyborg assassin known as the 'Terminator' back to 1984 to kill Sarah Connor, whose unborn son is destined to lead insurgents against 21st century mechanical hegemony. Meanwhile, the human-resistance movement dispatches a lone warrior to safeguard Sarah. Can he stop the virtually indestructible killing machine?",
           "poster_path": "/hzXSE66v6KthZ8nPoLZmsi2G05j.jpg",
           "media_type": "movie",
           "genre_ids": [
@@ -97,4 +97,4 @@ const searchMultiResponse = {
   ],
   "total_pages": 73,
   "total_results": 1444
-};
+}
