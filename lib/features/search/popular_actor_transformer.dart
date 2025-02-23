@@ -8,11 +8,19 @@ PopularActor mapToPopularActor(TMDBImageConfiguration config, SearchResult searc
   final movies = AppearsIn.fromMoviesKnownFor(config, actorBrief.moviesKnownFor!);
   final tvShows = AppearsIn.fromTvShowsKnownFor(config, actorBrief.tvShowsKnownFor!);
   return PopularActor(
-    id: actorBrief.id,
-    name: actorBrief.name,
-    popularity: actorBrief.popularity,
-    smallProfileImageUrl: parseImagePath(config.secureBaseUrl, config.profileSizes[smallProfileImageSizeIndex], actorBrief.profilePath),
-    largeProfileImageUrl: parseImagePath(config.secureBaseUrl, config.profileSizes[largeProfileImageSizeIndex], actorBrief.profilePath),
+    id: actorBrief.actor.tmdbId,
+    name: actorBrief.actor.name,
+    popularity: actorBrief.actor.popularity,
+    smallProfileImageUrl: parseImagePath(
+      config.secureBaseUrl,
+      config.profileSizes[smallProfileImageSizeIndex],
+      actorBrief.actor.profileImageUrl,
+    ),
+    largeProfileImageUrl: parseImagePath(
+      config.secureBaseUrl,
+      config.profileSizes[largeProfileImageSizeIndex],
+      actorBrief.actor.profileImageUrl,
+    ),
     appearsIn: [...movies, ...tvShows],
   );
 }

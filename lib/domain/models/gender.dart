@@ -1,9 +1,4 @@
-enum Gender {
-  unspecified,
-  female,
-  male,
-  other,
-}
+enum Gender { unspecified, female, male, other }
 
 extension GenderExtension on Gender {
   String get name {
@@ -16,21 +11,21 @@ extension GenderExtension on Gender {
         return 'Male';
       case Gender.other:
         return 'Other';
-      default:
-        throw ArgumentError('Invalid gender: $this');
     }
   }
 }
 
-Gender genderFromInt(int value) {
-  switch (value) {
-    case 0:
-      return Gender.other;
-    case 1:
-      return Gender.female;
-    case 2:
-      return Gender.male;
-    default:
-      return Gender.unspecified;
+extension GenderParser on int? {
+  Gender deriveGender() {
+    switch (this) {
+      case 0:
+        return Gender.other;
+      case 1:
+        return Gender.female;
+      case 2:
+        return Gender.male;
+      default:
+        return Gender.unspecified;
+    }
   }
 }

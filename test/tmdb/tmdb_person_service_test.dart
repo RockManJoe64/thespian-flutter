@@ -105,19 +105,33 @@ TMDB_AUTH_TOKEN=5678
       expect(actors.length, 3);
       expect(actors[0].id, 500);
       expect(actors[0].name, 'Tom Cruise');
-      expect(actors[0].profilePath, '/8qBylBsQf4llkGrWR3qAsOtOU8O.jpg');
-      expect(actors[0].knownFor, isNull);
+      expect(actors[0].originalName, 'Tom Cruise');
+      expect(actors[0].mediaType, 'person');
+      expect(actors[0].adult, false);
       expect(actors[0].popularity, 156.86);
+      expect(actors[0].gender, 2);
+      expect(actors[0].knownForDepartment, 'Acting');
+      expect(actors[0].profilePath, '/8qBylBsQf4llkGrWR3qAsOtOU8O.jpg');
+
       expect(actors[1].id, 11701);
       expect(actors[1].name, 'Angelina Jolie');
-      expect(actors[1].profilePath, '/bXNxIKcJ5cNNW8QFrBPWcfTSu9x.jpg');
-      expect(actors[1].knownFor, isNull);
+      expect(actors[1].originalName, 'Angelina Jolie');
+      expect(actors[1].mediaType, 'person');
+      expect(actors[1].adult, true);
       expect(actors[1].popularity, 75.877);
+      expect(actors[1].gender, 1);
+      expect(actors[1].knownForDepartment, 'Acting');
+      expect(actors[1].profilePath, '/bXNxIKcJ5cNNW8QFrBPWcfTSu9x.jpg');
+
       expect(actors[2].id, 110);
       expect(actors[2].name, 'Viggo Mortensen');
-      expect(actors[2].profilePath, '/vH5gVSpHAMhDaFWfh0Q7BG61O1y.jpg');
-      expect(actors[2].knownFor, isNull);
+      expect(actors[2].originalName, 'Viggo Mortensen');
+      expect(actors[2].mediaType, 'person');
+      expect(actors[2].adult, false);
       expect(actors[2].popularity, 37.305);
+      expect(actors[2].gender, 2);
+      expect(actors[2].knownForDepartment, 'Acting');
+      expect(actors[2].profilePath, '/vH5gVSpHAMhDaFWfh0Q7BG61O1y.jpg');
     });
 
     test('throws an exception if the API call fails', () async {

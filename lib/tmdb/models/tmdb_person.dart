@@ -25,6 +25,7 @@ class TMDBPerson with _$TMDBPerson {
     List<TmdbKnownFor>? knownFor, // Specific to popular people endpoint.
     String? knownForDepartment,
     String? name,
+    String? placeOfBirth,
     String? originalName,
     double? popularity, // Specific to popular, trending people endpoint.
     String? profilePath,

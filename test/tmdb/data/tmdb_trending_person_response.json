@@ -17,7 +17,7 @@
       "name": "Angelina Jolie",
       "original_name": "Angelina Jolie",
       "media_type": "person",
-      "adult": false,
+      "adult": true,
       "popularity": 75.877,
       "gender": 1,
       "known_for_department": "Acting",
